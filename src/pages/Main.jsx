@@ -12,7 +12,7 @@ import { SiGmail } from "react-icons/si";
 const Main = () => {
     return (
         <>
-            <div className='px-3 lg:px-20 '>
+            <div className='px-3 lg:px-20 mt-5'>
                 <div className='rounded-b-xl overflow-hidden border border-[#262626]'>
                     <div className=''>
                         <img src={banner} className='w-full h-56' alt="banner" />
