@@ -46,45 +46,45 @@ const Main = () => {
                         <p className='text-sm text-gray-800'>COIM</p>
                     </div>
                 </div>
-                <div className=' bg-[#1F1F1F] rounded-xl my-10 py-8 px-10'>
-                    <div className='flex items-center justify-between hover:bg-gray-600 cursor-pointer px-1 py-1 rounded-lg transition-colors duration-100'>
-                        <h6 className='text-white'>COIM Generation</h6>
-                        <div className='text-white bg-[#ce9600] rounded-2xl px-2 py-1  flex gap-2 items-center'>
+                <div className=' bg-[#1F1F1F] text-[#ce9600] rounded-xl my-10 py-8 px-10'>
+                    <div className='flex items-center justify-between hover:bg-[#262626] cursor-pointer pr-1 pl-2 py-1 rounded-lg transition-colors duration-100'>
+                        <h6>COIM Generation</h6>
+                        <div className=' bg-[#2c281d] rounded-2xl px-2 py-1  flex gap-2 items-center'>
                             <div><FaArrowRight /></div>
                             <span>Minnnig</span>
                         </div>
                     </div>
-                    <div className='flex items-center justify-between mt-7  hover:bg-gray-600 px-1 py-1 cursor-pointer rounded-lg transition-colors duration-100'>
-                        <h6 className='text-white'>Wallet</h6>
-                        <div className='text-white bg-[#ce9600] rounded-2xl px-2 py-1  flex gap-2 items-center'>
+                    <div className='flex items-center text-[#ce9600] justify-between mt-7  hover:bg-[#262626] pr-1 pl-2 py-1 cursor-pointer rounded-lg transition-colors duration-100'>
+                        <h6>Wallet</h6>
+                        <div className=' bg-[#2c281d] rounded-2xl px-2 py-1  flex gap-2 items-center'>
                             <div><FaArrowRight /></div>
                             <span>Wallet</span>
                         </div>
                     </div>
-                    <div className='flex items-center justify-between mt-7  hover:bg-gray-600 px-1 py-1 cursor-pointer rounded-lg transition-colors duration-100'>
-                        <h6 className='text-white'>Refferals</h6>
-                        <div className='text-white bg-[#ce9600] rounded-2xl px-2 py-1  flex gap-2 items-center'>
+                    <div className='flex items-center text-[#ce9600] justify-between mt-7  hover:bg-[#262626] pr-1 pl-2 py-1 cursor-pointer rounded-lg transition-colors duration-100'>
+                        <h6 >Refferals</h6>
+                        <div className=' bg-[#2c281d] rounded-2xl px-2 py-1  flex gap-2 items-center'>
                             <div><FaArrowRight /></div>
                             <span>Refferals</span>
                         </div>
                     </div>
-                    <div className='flex items-center justify-between mt-7  hover:bg-gray-600 px-1 py-1 cursor-pointer rounded-lg transition-colors duration-100'>
-                        <h6 className='text-white'>News</h6>
-                        <div className='text-white bg-[#ce9600] rounded-2xl px-2 py-1  flex gap-2 items-center'>
+                    <div className='flex items-center text-[#ce9600] justify-between mt-7  hover:bg-[#262626] pr-1 pl-2 py-1 cursor-pointer rounded-lg transition-colors duration-100'>
+                        <h6 className=''>News</h6>
+                        <div className=' bg-[#2c281d] rounded-2xl px-2 py-1  flex gap-2 items-center'>
                             <div><FaArrowRight /></div>
                             <span>News</span>
                         </div>
                     </div>
-                    <div className='flex items-center justify-between mt-7  hover:bg-gray-600 px-1 py-1 cursor-pointer rounded-lg transition-colors duration-100'>
-                        <h6 className='text-white'>My Profile</h6>
-                        <div className='text-white bg-[#ce9600] rounded-2xl px-2 py-1  flex gap-2 items-center'>
+                    <div className='flex items-center text-[#ce9600] justify-between mt-7  hover:bg-[#262626] pr-1 pl-2 py-1 cursor-pointer rounded-lg transition-colors duration-100'>
+                        <h6>My Profile</h6>
+                        <div className=' bg-[#2c281d] rounded-2xl px-2 py-1  flex gap-2 items-center'>
                             <div><FaArrowRight /></div>
                             <span>My Profile</span>
                         </div>
                     </div>
-                    <div className='flex items-center justify-between mt-7  hover:bg-gray-600 px-1 py-1 cursor-pointer rounded-lg transition-colors duration-100'>
-                        <h6 className='text-white'>Wallet</h6>
-                        <div className='text-white bg-[#ce9600] rounded-2xl px-2 py-1  flex gap-2 items-center'>
+                    <div className='flex items-center text-[#ce9600] justify-between mt-7  hover:bg-[#262626] pr-1 pl-2 py-1 cursor-pointer rounded-lg transition-colors duration-100'>
+                        <h6>Wallet</h6>
+                        <div className=' bg-[#2c281d] rounded-2xl px-2 py-1  flex gap-2 items-center'>
                             <div><FaArrowRight /></div>
                             <span>Minnnig</span>
                         </div>
@@ -92,12 +92,12 @@ const Main = () => {
                 </div>
                 <div>
                     <div className='flex items-center justify-center gap-5'>
-                        <div className='bg-[#ce9600] rounded-2xl cursor-pointer pl-2 pr-2 md:pr-6 py-1 '><FaTwitter /></div>
-                        <div className='bg-[#ce9600] rounded-2xl cursor-pointer pl-2 pr-2 md:pr-6 py-1'><FaFacebookF /></div>
-                        <div className='bg-[#ce9600] rounded-2xl cursor-pointer pl-2 pr-2 md:pr-6 py-1'><AiFillInstagram /></div>
-                        <div className='bg-[#ce9600] rounded-2xl cursor-pointer pl-2 pr-2 md:pr-6 py-1'><SiGmail /></div>
-                        <div className='bg-[#ce9600] rounded-2xl cursor-pointer pl-2 pr-2 md:pr-6 py-1'> <RiYoutubeFill /></div>
-                        <div className='bg-[#ce9600] rounded-2xl cursor-pointer pl-2 pr-2 md:pr-6 py-1 flex  items-center gap-2'><FaTelegramPlane /><span className='hidden md:block'>Telegram</span></div>
+                        <div className='bg-[#2c281d] rounded-2xl cursor-pointer pl-2 pr-2 md:pr-6 py-1 text-[#ce9600]'><FaTwitter /></div>
+                        <div className='bg-[#2c281d] rounded-2xl cursor-pointer pl-2 pr-2 md:pr-6 py-1 text-[#ce9600]'><FaFacebookF /></div>
+                        <div className='bg-[#2c281d] rounded-2xl cursor-pointer pl-2 pr-2 md:pr-6 py-1 text-[#ce9600]'><AiFillInstagram /></div>
+                        <div className='bg-[#2c281d] rounded-2xl cursor-pointer pl-2 pr-2 md:pr-6 py-1 text-[#ce9600]'><SiGmail /></div>
+                        <div className='bg-[#2c281d] rounded-2xl cursor-pointer pl-2 pr-2 md:pr-6 py-1 text-[#ce9600]'> <RiYoutubeFill /></div>
+                        <div className='bg-[#2c281d] rounded-2xl cursor-pointer pl-2 pr-2 md:pr-6 py-1 text-[#ce9600] flex  items-center gap-2'><FaTelegramPlane /><span className='hidden md:block'>Telegram</span></div>
                     </div>
                 </div>
             </div>
