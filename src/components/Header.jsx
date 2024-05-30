@@ -46,7 +46,7 @@ function ProfileMenu() {
     const closeMenu = () => setIsMenuOpen(false);
 
     return (
-        <Menu open={isMenuOpen} handler={setIsMenuOpen} placement="bottom-end">
+        <Menu open={isMenuOpen} handler={setIsMenuOpen} placement="bottom-end" >
             <MenuHandler>
                 <Button
                     variant="text"
@@ -67,7 +67,7 @@ function ProfileMenu() {
                     />
                 </Button>
             </MenuHandler>
-            <MenuList className="p-1">
+            <MenuList className="p-1 ">
                 {profileMenuItems.map(({ label, icon }, key) => {
                     const isLastItem = key === profileMenuItems.length - 1;
                     return (
@@ -146,7 +146,7 @@ const navListItems = [
 
 function NavList() {
     return (
-        <ul className="mt-2 mb-4 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center">
+        <ul className="mt-2 mb-4 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center ">
             <NavListMenu />
             {navListItems.map(({ label, icon }, key) => (
                 <Typography

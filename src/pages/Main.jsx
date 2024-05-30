@@ -12,8 +12,8 @@ import { SiGmail } from "react-icons/si";
 const Main = () => {
     return (
         <>
-            <div className='px-3 lg:px-20'>
-                <div className='bg-red-200 rounded-b-xl overflow-hidden '>
+            <div className='px-3 lg:px-20 '>
+                <div className='rounded-b-xl overflow-hidden '>
                     <div className=''>
                         <img src={banner} className='w-full h-56' alt="banner" />
                     </div>
