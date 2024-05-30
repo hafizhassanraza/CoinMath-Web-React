@@ -4,6 +4,7 @@ import { ComplexNavbar } from './components/Header';
 import Main from './pages/Main';
 import Wallet from './pages/Wallet';
 import Token from './pages/Token';
+import Referrals from './pages/Referrals';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route path="/" element={<Main />} />
         <Route path="/wallet" element={<Wallet />} />
         <Route path="/token" element={<Token />} />
+        <Route path="/ref" element={<Referrals />} />
       </Routes>
     </Router>
   );

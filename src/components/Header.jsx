@@ -63,6 +63,7 @@ const navListItems = [
     {
         label: "Referrals",
         icon: CodeBracketSquareIcon,
+        path: '/ref'
     },
     {
         label: "News",
