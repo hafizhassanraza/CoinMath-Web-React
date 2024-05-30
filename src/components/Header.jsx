@@ -53,6 +53,7 @@ const navListItems = [
     {
         label: "COIN Gen",
         icon: CubeTransparentIcon,
+        path: '/token'
     },
     {
         label: "Wallet",
