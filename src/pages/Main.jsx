@@ -54,42 +54,42 @@ const Main = () => {
                 <div className=' bg-[#1F1F1F] text-[#ce9600] rounded-xl mt-7 mb-5 py-8 px-10 border border-[#262626]'>
                     <div className='flex items-center justify-between hover:bg-[#262626] cursor-pointer pr-1 pl-2 py-1 rounded-lg transition-colors duration-100'>
                         <h6 className='text-white'>COIM Generation</h6>
-                        <div className=' bg-[#2c281d] rounded-2xl px-2 py-1  flex gap-2 items-center'>
+                        <div className=' bg-[#2c281d] rounded-2xl px-2 py-2  flex gap-2 items-center'>
                             <div><FaArrowRight /></div>
                             <span>Minnnig</span>
                         </div>
                     </div>
                     <div className='flex items-center text-[#ce9600] justify-between mt-7  hover:bg-[#262626] pr-1 pl-2 py-1 cursor-pointer rounded-lg transition-colors duration-100'>
                         <h6 className='text-white'>Wallet</h6>
-                        <div className=' bg-[#2c281d] rounded-2xl px-2 py-1  flex gap-2 items-center'>
+                        <div className=' bg-[#2c281d] rounded-2xl px-2 py-2  flex gap-2 items-center'>
                             <div><FaArrowRight /></div>
                             <span>Wallet</span>
                         </div>
                     </div>
                     <div className='flex items-center text-[#ce9600] justify-between mt-7  hover:bg-[#262626] pr-1 pl-2 py-1 cursor-pointer rounded-lg transition-colors duration-100'>
                         <h6 className='text-white'>Refferals</h6>
-                        <div className=' bg-[#2c281d] rounded-2xl px-2 py-1  flex gap-2 items-center'>
+                        <div className=' bg-[#2c281d] rounded-2xl px-2 py-2  flex gap-2 items-center'>
                             <div><FaArrowRight /></div>
                             <span>Refferals</span>
                         </div>
                     </div>
                     <div className='flex items-center text-[#ce9600] justify-between mt-7  hover:bg-[#262626] pr-1 pl-2 py-1 cursor-pointer rounded-lg transition-colors duration-100'>
                         <h6 className='text-white'>News</h6>
-                        <div className=' bg-[#2c281d] rounded-2xl px-2 py-1  flex gap-2 items-center'>
+                        <div className=' bg-[#2c281d] rounded-2xl px-2 py-2  flex gap-2 items-center'>
                             <div><FaArrowRight /></div>
                             <span>News</span>
                         </div>
                     </div>
                     <div className='flex items-center text-[#ce9600] justify-between mt-7  hover:bg-[#262626] pr-1 pl-2 py-1 cursor-pointer rounded-lg transition-colors duration-100'>
                         <h6 className='text-white'>My Profile</h6>
-                        <div className=' bg-[#2c281d] rounded-2xl px-2 py-1  flex gap-2 items-center'>
+                        <div className=' bg-[#2c281d] rounded-2xl px-2 py-2  flex gap-2 items-center'>
                             <div><FaArrowRight /></div>
                             <span>My Profile</span>
                         </div>
                     </div>
                     <div className='flex items-center text-[#ce9600] justify-between mt-7  hover:bg-[#262626] pr-1 pl-2 py-1 cursor-pointer rounded-lg transition-colors duration-100'>
                         <h6 className='text-white'>Wallet</h6>
-                        <div className=' bg-[#2c281d] rounded-2xl px-2 py-1  flex gap-2 items-center'>
+                        <div className=' bg-[#2c281d] rounded-2xl px-2 py-2  flex gap-2 items-center'>
                             <div><FaArrowRight /></div>
                             <span>Minnnig</span>
                         </div>
@@ -106,9 +106,6 @@ const Main = () => {
                     </div>
                 </div>
             </div>
-
-
-
         </>
     )
 }

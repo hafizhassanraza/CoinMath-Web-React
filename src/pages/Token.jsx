@@ -30,15 +30,6 @@ const Token = () => {
                         </div>
                     </div>
                 </div>
-                {/* <div className=' bg-[#1F1F1F] text-[#ce9600] rounded-xl my-10 py-8 px-10 border border-[#262626]'>
-                    <div className='flex items-center justify-between hover:bg-[#262626] cursor-pointer pr-1 pl-2 py-1 rounded-lg transition-colors duration-100'>
-                        <h6 className='text-white'>COIM Generation</h6>
-                        <div className=' bg-[#2c281d] rounded-2xl px-2 py-1  flex gap-2 items-center'>
-                            <div><FaArrowRight /></div>
-                            <span>Minnnig</span>
-                        </div>
-                    </div>
-                </div> */}
                 <div className=' bg-[#1F1F1F] rounded-xl mt-8 mb-16 py-4 px-10 border border-[#262626]'>
                     <div className='flex justify-between w-full text-white'>
                         <p className='text-[12px]'>Generation Progress</p>
