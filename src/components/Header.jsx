@@ -68,6 +68,7 @@ const navListItems = [
     {
         label: "News",
         icon: CodeBracketSquareIcon,
+        path: '/news'
     },
 ];
 
