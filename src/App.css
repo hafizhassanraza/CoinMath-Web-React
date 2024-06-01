@@ -26,3 +26,7 @@ html, body {
 .slide-in {
     animation: slide-in-right 0.5s forwards;
 }
+.boxShadow{
+    box-shadow: 0 3px 20px #0052FD;
+    box-shadow: #0052FD 0px 5px 12px 2px, #0052FD 0px 0px 7px 7px;
+}

@@ -96,7 +96,7 @@ function NavList() {
     );
 }
 
-export function ComplexNavbar() {
+export function LoginHeader() {
     const [isNavOpen, setIsNavOpen] = React.useState(false);
 
     const toggleIsNavOpen = () => setIsNavOpen((cur) => !cur);
@@ -137,3 +137,4 @@ export function ComplexNavbar() {
         </>
     );
 }
+

@@ -108,7 +108,6 @@ const Profile = () => {
             </div>
             {showModal && <Modal closeModal={closeModal} />} 
             {showSideModal && <SideModal closeSideModal={closeSideModal} />}
-            {/* {showModal && <SideModel closeModal={closeSideModal} />} */}
         </>
     );
 };
