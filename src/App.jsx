@@ -8,6 +8,7 @@ import Referrals from './pages/Referrals';
 import News from './pages/News';
 import Profile from './pages/Profile';
 import Login from './pages/Login';
+import SignIn from './pages/SignIn';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/news" element={<News />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<SignIn />} />
       </Routes>
     </Router>
   );
