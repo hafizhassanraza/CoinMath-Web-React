@@ -10,3 +10,7 @@ html, body {
     flex-direction: column;
     background: #171717;
 }
+.no-border {
+    border: none;
+    box-shadow: none;
+}

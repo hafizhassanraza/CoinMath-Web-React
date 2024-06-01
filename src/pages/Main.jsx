@@ -7,6 +7,9 @@ import { AiFillInstagram } from "react-icons/ai";
 import { RiYoutubeFill } from "react-icons/ri";
 import { FaTelegramPlane } from "react-icons/fa";
 import { SiGmail } from "react-icons/si";
+import { AiOutlineQuestionCircle } from "react-icons/ai";
+
+
 
 
 const Main = () => {
@@ -29,8 +32,10 @@ const Main = () => {
                             </div>
                             <div>
                                 <div className='flex gap-2 md:mt-2'>
-                                    <button className='bg-[#ce9600] px-3 py-1 rounded-lg cursor-pointer text-white'>About</button>
-                                    <button className='bg-transparent border border-gray-500 px-3 py-1 rounded-lg text-white cursor-pointer'>Guide</button>
+                                    <button className='bg-[#ce9600] px-3 py-2 rounded-lg cursor-pointer text-white flex items-center gap-2 hover:bg-[#ce9600]/90 transition duration-200 ease-in-out'><AiOutlineQuestionCircle className='text-xl' />About</button>
+                                    <button className='bg-transparent border border-gray-500 px-3 py-1 rounded-lg text-white cursor-pointer hover:bg-white/10 transition duration-200 ease-in-out'>
+                                        Guide
+                                    </button>
                                 </div>
                             </div>
                         </div>
