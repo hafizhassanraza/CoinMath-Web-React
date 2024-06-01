@@ -22,12 +22,20 @@ function ProfileMenu() {
 
     return (
         <Menu open={isMenuOpen} handler={setIsMenuOpen} placement="bottom-end">
-            <MenuHandler>
-                <button className="flex items-center gap-1 rounded-full py-0.5 pr-2 pl-0.5 lg:ml-auto" onClick={() => setIsMenuOpen(true)}>
-                    <Avatar variant="circular" size="sm" alt="tania andrew" className="border border-gray-900 p-0.5" src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80" />
-                    <ChevronDownIcon strokeWidth={2.5} className={`h-3 w-3 transition-transform text-white ${isMenuOpen ? 'rotate-180' : ''}`} />
-                </button>
-            </MenuHandler>
+            <div>
+                <div className='flex gap-2 md:mt-2'>
+                    <Link to="/signin">
+                        <button className='bg-transparent border border-gray-500 px-3 py-1.5 rounded-lg text-white cursor-pointer hover:bg-white/10 transition duration-200 ease-in-out'>
+                            Sign Up
+                        </button>
+                    </Link>
+                    <Link to="/signup">
+                        <button className=' bg-[#ce9600] px-3 py-1.5 rounded-lg cursor-pointer text-white flex items-center gap-2 hover:bg-[#ce9600]/90 transition duration-200 ease-in-out'>
+                            Sign In
+                        </button>
+                    </Link>
+                </div>
+            </div>
             <MenuList className="p-1">
                 {profileMenuItems.map(({ label, icon, path }, key) => {
                     const isLastItem = key === profileMenuItems.length - 1;
@@ -119,7 +127,7 @@ export function LoginHeader() {
                             </div>
                         </Typography>
                         <div className="hidden lg:block">
-                            <NavList />
+                            {/* <NavList /> */}
                         </div>
                         <div className="flex">
                             <IconButton size="sm" color="blue-gray" variant="text" onClick={toggleIsNavOpen} className="ml-auto mr-2 lg:hidden">

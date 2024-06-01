@@ -8,12 +8,15 @@ import { RiYoutubeFill } from "react-icons/ri";
 import { FaTelegramPlane } from "react-icons/fa";
 import { SiGmail } from "react-icons/si";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
+import { Link } from 'react-router-dom';
+import { LoginHeader } from '../components/LoginHeader';
 
 
 const Login = () => {
     return (
         <>
-            <div className='px-3 lg:px-20 mt-5 '>
+        <LoginHeader/>
+            <div className='px-3 lg:px-20 mt-5 pb-24'>
                 <div className='rounded-b-xl overflow-hidden border border-[#262626] bg-[#1F1F1F]'>
                     <div className=''>
                         <img src={banner} className='w-full h-56' alt="banner" />
@@ -32,10 +35,13 @@ const Login = () => {
                     </div>
                     <div className='bg-[#1F1F1F] px-10 pb-10'>
                         <div className='flex w-full justify-between gap-2'>
-                            <button className='bg-[#ce9600] px-64 py-2 rounded-lg cursor-pointer text-white flex items-center gap-2 hover:bg-[#ce9600]/90 transition duration-200 ease-in-out'><AiOutlineQuestionCircle className='text-xl' />Sign In</button>
-                            <button className='bg-transparent px-64 border border-gray-500 py-1 rounded-lg text-white cursor-pointer hover:bg-white/10 transition duration-200 ease-in-out'>
+                            <Link to="/signin">
+                                <button className='bg-[#ce9600] px-64 py-2 rounded-lg cursor-pointer text-white flex items-center gap-2 hover:bg-[#ce9600]/90 transition duration-200 ease-in-out'><AiOutlineQuestionCircle className='text-xl' />Sign In</button>
+                            </Link>
+                            <Link to="/signup"> <button className='bg-transparent px-64 border border-gray-500 py-1 rounded-lg text-white cursor-pointer hover:bg-white/10 transition duration-200 ease-in-out'>
                                 Sign Up
                             </button>
+                            </Link>
                         </div>
                     </div>
                     <div className='px-10'>

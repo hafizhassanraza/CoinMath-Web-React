@@ -1,7 +1,8 @@
 import React from 'react'
+import bg from '../assets/images/bg.jpg'
 import { Link } from 'react-router-dom'
 
-const SignIn = () => {
+const SignUp = () => {
     return (
         <div className="background">
             <div className="shape"></div>
@@ -9,7 +10,7 @@ const SignIn = () => {
                 <div className='flex justify-center rounded-full'>
                     <img className="w-14 rounded-2xl" src="https://res.cloudinary.com/glide/image/fetch/f_auto,h_150,c_limit/https%3A%2F%2Ffirebasestorage.googleapis.com%2Fv0%2Fb%2Fglide-prod.appspot.com%2Fo%2Ficon-images%252Fanonymous-b8b74b04-83a5-46d6-a2cc-25e0559d33df.png%3Falt%3Dmedia%26token%3D633ff17b-72a8-49f5-8f96-a06e64af4679" alt="logo" />
                 </div>
-                <h3 className=''>Log in to CoinMath</h3>
+                <h3 className=''>Sign up to CoinMath</h3>
                 <p className='py-6 text-center text-sm'>Please enter your email address</p>
                 <input
                     type="text"
@@ -32,10 +33,11 @@ const SignIn = () => {
                 <div className='flex justify-center pb-5 pt-1'>
                     <button className='bg-[#ce9600] px-32 py-2 rounded-lg cursor-pointer text-white flex items-center gap-2 hover:bg-[#ce9600]/90 transition duration-200 ease-in-out'>Continue</button>
                 </div>
-                <p className='text-sm text-center mt-2'>Don't have an account yet? <Link to="/signup"><span className='text-gray-700 hover:underline cursor-pointer font-bold'>Sign Up</span></Link></p>
+                <p className='text-sm text-center mt-2'>Already have an account? <Link to="/signin"><span className='text-gray-700 hover:underline cursor-pointer font-bold'>Customer log in</span></Link></p>
             </form>
         </div>
+
     )
 }
 
-export default SignIn
+export default SignUp
