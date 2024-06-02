@@ -12,6 +12,7 @@ import Login from './pages/Login';
 import { ComplexNavbar } from './components/Header';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
+import EmailChecker from './pages/EmailChecker';
 
 function App() {
   let user = true;
@@ -42,6 +43,7 @@ function App() {
           <Route path='/login' element={<Login />} />
           <Route path='/signup' element={<SignUp />} />
           <Route path='/signin' element={<SignIn />} />
+          <Route path='/check' element={<EmailChecker />} />
         </Routes>
       </Suspense>
     </Router>

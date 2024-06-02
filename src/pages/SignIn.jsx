@@ -28,9 +28,11 @@ const SignIn = () => {
                     </div>
                     <p className="text-white text-[11px] md:text-[13px]">I have read and agree to the<span className='text-gray-700 hover:underline cursor-pointer font-bold'> Privacy Policy</span></p>
                 </label>
-                <div className='flex justify-center pb-5 pt-1'>
-                    <button className='bg-[#ce9600] px-20 md:px-32 py-2 rounded-lg cursor-pointer text-white flex items-center gap-2 hover:bg-[#ce9600]/90 transition duration-200 ease-in-out'>Continue</button>
-                </div>
+                <Link to="/check">
+                    <div className='flex justify-center pb-5 pt-1'>
+                        <button className='bg-[#ce9600] px-20 md:px-32 py-2 rounded-lg cursor-pointer text-white flex items-center gap-2 hover:bg-[#ce9600]/90 transition duration-200 ease-in-out'>Continue</button>
+                    </div>
+                </Link>
                 <p className='text-[11px] md:text-[13px] text-center mt-2'>Don't have an account yet? <Link to="/signup"><span className='text-gray-700 hover:underline cursor-pointer font-bold'>Sign Up</span></Link></p>
             </form>
         </div>
