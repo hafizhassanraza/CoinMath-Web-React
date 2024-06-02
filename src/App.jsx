@@ -22,7 +22,7 @@ function App() {
     const isSignInRoute = location.pathname === '/signin';
     const isSignUpRoute = location.pathname === '/signup';
     const isLoginRoute = location.pathname === '/login';
-    const isProtectedRoute = location.pathname !== '/signin' && location.pathname !== '/signup' && location.pathname !== '/login';
+    const isProtectedRoute = location.pathname !== '/signin' && location.pathname !== '/signup' && location.pathname !== '/login' && location.pathname !== '/check';
 
     return isProtectedRoute && <ComplexNavbar />;
   }
