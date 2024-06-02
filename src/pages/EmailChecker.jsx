@@ -17,9 +17,11 @@ const EmailChecker = () => {
                         className="w-full px-3 rounded-lg py-2 text-white bg-[#363636] focus:outline-none focus:ring-2 focus:ring-[#CE9600] hover:ring-2 hover:ring-[#363636]/30 ease-in-out transition-all"
                     />
                 </div>
-                <div className='flex justify-center pb-5 pt-6'>
-                    <button className='bg-[#ce9600] px-20 md:px-32 py-2 rounded-lg cursor-pointer text-white flex items-center gap-2 hover:bg-[#ce9600]/90 transition duration-200 ease-in-out'>Sign In</button>
-                </div>
+                <Link to="/details">
+                    <div className='flex justify-center pb-5 pt-6'>
+                        <button className='bg-[#ce9600] px-20 md:px-32 py-2 rounded-lg cursor-pointer text-white flex items-center gap-2 hover:bg-[#ce9600]/90 transition duration-200 ease-in-out'>Sign In</button>
+                    </div>
+                </Link>
                 <p className="text-[#ce9600] font-semibold  text-[11px] md:text-[15px] text-center mt-3 mb-7 cursor-pointer">I need another pin</p>
                 <p className='text-[11px] md:text-[13px] text-center mt-2'>Don't have an account yet?<Link to="/signin"><span className='text-gray-700 hover:underline cursor-pointer font-bold'>Sign Up</span></Link></p>
             </form>

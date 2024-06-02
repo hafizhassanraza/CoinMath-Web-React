@@ -13,6 +13,7 @@ import { ComplexNavbar } from './components/Header';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 import EmailChecker from './pages/EmailChecker';
+import ProfileDetail from './pages/ProfileDetail';
 
 function App() {
   let user = true;
@@ -22,7 +23,7 @@ function App() {
     const isSignInRoute = location.pathname === '/signin';
     const isSignUpRoute = location.pathname === '/signup';
     const isLoginRoute = location.pathname === '/login';
-    const isProtectedRoute = location.pathname !== '/signin' && location.pathname !== '/signup' && location.pathname !== '/login' && location.pathname !== '/check';
+    const isProtectedRoute = location.pathname !== '/signin' && location.pathname !== '/signup' && location.pathname !== '/login' && location.pathname !== '/check' && location.pathname !== '/details';
 
     return isProtectedRoute && <ComplexNavbar />;
   }
@@ -44,6 +45,7 @@ function App() {
           <Route path='/signup' element={<SignUp />} />
           <Route path='/signin' element={<SignIn />} />
           <Route path='/check' element={<EmailChecker />} />
+          <Route path="/details" element={<ProfileDetail />} />
         </Routes>
       </Suspense>
     </Router>
