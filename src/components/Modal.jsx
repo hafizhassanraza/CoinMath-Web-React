@@ -1,4 +1,5 @@
 import React from "react";
+import { MdOutlineCancelScheduleSend } from "react-icons/md";
 
 const Modal = ({ closeModal }) => {
     return (
@@ -13,7 +14,7 @@ const Modal = ({ closeModal }) => {
                             <button
                                 className="p-1 ml-auto bg-transparent border-0 text-white opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
                                 onClick={closeModal}
-                            >x  
+                            >x
                             </button>
                         </div>
                         <div className="relative px-6  flex text-white">
@@ -30,13 +31,12 @@ const Modal = ({ closeModal }) => {
                             />
                         </div>
                         <div className="mb-4">
-                            <div className="flex items-center bg-[#CE9600] hover:bg-[#CE9600]/90 justify-center  my-3 mx-64 rounded-lg cursor-pointer  border-solid border-blueGray-200">
+                            <div onClick={closeModal} className="flex items-center bg-[#CE9600] hover:bg-[#CE9600]/90 justify-center  my-3 mx-64 rounded-lg cursor-pointer  border-solid border-blueGray-200">
                                 <button
-                                    className="text-white background-transparent font-bold uppercase px-6 py-2.5 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                                    className="text-white flex items-center gap-2 background-transparent font-bold uppercase px-6 py-2.5 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                                     type="button"
-                                    onClick={closeModal}
                                 >
-                                    Cancel
+                                    <MdOutlineCancelScheduleSend/>Cancel
                                 </button>
                             </div>
                         </div>

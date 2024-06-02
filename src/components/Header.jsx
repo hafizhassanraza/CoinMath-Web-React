@@ -2,6 +2,12 @@ import React from "react";
 import { Navbar, MobileNav, Typography, Button, Menu, MenuHandler, MenuList, MenuItem, Avatar, IconButton } from "@material-tailwind/react";
 import { CubeTransparentIcon, UserCircleIcon, CodeBracketSquareIcon, ChevronDownIcon, PowerIcon, Bars2Icon } from "@heroicons/react/24/solid";
 import { Link, useLocation } from 'react-router-dom';
+import { IoNewspaperOutline } from "react-icons/io5";
+import { MdRoomPreferences } from "react-icons/md";
+import { IoWalletSharp } from "react-icons/io5";
+import { LuCoins } from "react-icons/lu";
+import { MdOutlineHome } from "react-icons/md";
+
 
 const profileMenuItems = [
     {
@@ -10,9 +16,9 @@ const profileMenuItems = [
         path: '/profile'
     },
     {
-        label: "Sign In",
+        label: "Login",
         icon: PowerIcon,
-        path: '/signin'
+        path: '/login'
     },
 ];
 
@@ -49,27 +55,27 @@ function ProfileMenu() {
 const navListItems = [
     {
         label: "Home",
-        icon: UserCircleIcon,
+        icon: MdOutlineHome,
         path: '/',
     },
     {
         label: "COIN Gen",
-        icon: CubeTransparentIcon,
+        icon: LuCoins,
         path: '/token'
     },
     {
         label: "Wallet",
-        icon: CodeBracketSquareIcon,
+        icon: IoWalletSharp,
         path: '/wallet',
     },
     {
         label: "Referrals",
-        icon: CodeBracketSquareIcon,
+        icon: MdRoomPreferences,
         path: '/ref'
     },
     {
         label: "News",
-        icon: CodeBracketSquareIcon,
+        icon: IoNewspaperOutline,
         path: '/news'
     },
 ];

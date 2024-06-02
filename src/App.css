@@ -61,6 +61,12 @@ form{
     padding: 50px 35px;
     overflow: hidden;
 }
+@media screen and (max-width:320px ) {
+    form{
+        height: 500px;
+        width: 300px;
+    }
+}
 form *{
     font-family: 'Poppins',sans-serif;
     color: #ffffff;
@@ -68,16 +74,11 @@ form *{
     outline: none;
     border: none;
 }
-form h3{
-    font-size: 25px;
-    font-weight: 600;
-    line-height: 42px;
-    text-align: center;
-    padding-top: 30px;
-}
+
 
 ::placeholder{
     color: #e5e5e5;
+    font-size: 12px;
 }
 .credit a{
   text-decoration: none;

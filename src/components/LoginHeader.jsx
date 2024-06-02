@@ -130,16 +130,16 @@ export function LoginHeader() {
                             {/* <NavList /> */}
                         </div>
                         <div className="flex">
-                            <IconButton size="sm" color="blue-gray" variant="text" onClick={toggleIsNavOpen} className="ml-auto mr-2 lg:hidden">
+                            {/* <IconButton size="sm" color="blue-gray" variant="text" onClick={toggleIsNavOpen} className="ml-auto mr-2 lg:hidden">
                                 <Bars2Icon className="h-6 w-6" />
-                            </IconButton>
+                            </IconButton> */}
 
                             <ProfileMenu />
                         </div>
                     </div>
-                    <MobileNav open={isNavOpen} className="overflow-scroll">
+                    {/* <MobileNav open={isNavOpen} className="overflow-scroll">
                         <NavList />
-                    </MobileNav>
+                    </MobileNav> */}
                 </Navbar>
             </div>
         </>

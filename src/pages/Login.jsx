@@ -1,15 +1,10 @@
 import React from 'react'
 import banner from '../assets/images/banner.webp'
-import { FaArrowRight } from "react-icons/fa6";
-import { FaTwitter } from "react-icons/fa6";
-import { FaFacebookF } from "react-icons/fa6";
-import { AiFillInstagram } from "react-icons/ai";
-import { RiYoutubeFill } from "react-icons/ri";
-import { FaTelegramPlane } from "react-icons/fa";
-import { SiGmail } from "react-icons/si";
+import { PiSignIn } from "react-icons/pi";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
 import { Link } from 'react-router-dom';
 import { LoginHeader } from '../components/LoginHeader';
+import { TfiWrite } from "react-icons/tfi";
 
 
 const Login = () => {
@@ -36,9 +31,9 @@ const Login = () => {
                     <div className='bg-[#1F1F1F] px-10 pb-10'>
                         <div className='flex w-full justify-between gap-2'>
                             <Link to="/signin">
-                                <button className='bg-[#ce9600] px-64 py-2 rounded-lg cursor-pointer text-white flex items-center gap-2 hover:bg-[#ce9600]/90 transition duration-200 ease-in-out'><AiOutlineQuestionCircle className='text-xl' />Sign In</button>
+                                <button className='bg-[#ce9600] px-52 py-2 rounded-lg cursor-pointer text-white flex items-center gap-2 hover:bg-[#ce9600]/90 transition duration-200 ease-in-out'><PiSignIn className='text-xl' />Sign In</button>
                             </Link>
-                            <Link to="/signup"> <button className='bg-transparent px-64 border border-gray-500 py-1 rounded-lg text-white cursor-pointer hover:bg-white/10 transition duration-200 ease-in-out'>
+                            <Link to="/signup"> <button className='bg-transparent px-52 border border-gray-500 py-1 flex items-center gap-2 rounded-lg text-white cursor-pointer hover:bg-white/10 transition duration-200 ease-in-out'><TfiWrite className='text-sm'/>
                                 Sign Up
                             </button>
                             </Link>
