@@ -5,7 +5,7 @@ const Modal = ({ closeModal }) => {
     return (
         <>
             <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
-                <div className="relative my-6 mx-auto w-[1100px]">
+                <div className="relative my-6 mx-auto w-[300px]  md:w-[650px] lg:w-[1100px]">
                     <div className="px-4 rounded-lg shadow-lg relative flex flex-col w-full bg-[#1F1F1F] outline-none focus:outline-none">
                         <div className="flex items-start justify-between p-5 border-solid">
                             <h3 className="text-xl text-center w-full text-white font-semibold">
@@ -17,9 +17,9 @@ const Modal = ({ closeModal }) => {
                             >x
                             </button>
                         </div>
-                        <div className="relative px-6  flex text-white">
+                        <div className="relativeflex flex-col px-6  md:flex md:flex-row text-white">
                             <h6 className="font-semibold text-[15px] pr-2">Your current referral code:</h6>
-                            <p>5b94314d-2fab-4330-b339-0963d338bffb</p>
+                            <p className="mt-3 md:mt-0">5b94314d-2fab-4330-b339-0963d338bffb</p>
                         </div>
                         <div className="relative px-6 pt-6 mb-3 flex text-white">
                             <h6 className="font-bold text-[16px]">New Code</h6>
@@ -31,7 +31,7 @@ const Modal = ({ closeModal }) => {
                             />
                         </div>
                         <div className="mb-4">
-                            <div onClick={closeModal} className="flex items-center bg-[#CE9600] hover:bg-[#CE9600]/90 justify-center  my-3 mx-64 rounded-lg cursor-pointer  border-solid border-blueGray-200">
+                            <div onClick={closeModal} className="flex items-center bg-[#CE9600] hover:bg-[#CE9600]/90 justify-center  my-3 mx-20 lg:mx-64 md:mx-52 rounded-lg cursor-pointer  border-solid border-blueGray-200">
                                 <button
                                     className="text-white flex items-center gap-2 background-transparent font-bold uppercase px-6 py-2.5 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                                     type="button"

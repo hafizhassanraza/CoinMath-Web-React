@@ -81,11 +81,11 @@ const Profile = () => {
                     </div>
                 </div>
                 <div className='bg-[#1F1F1F] text-[#ce9600] rounded-xl mt-7 mb-5 py-8 px-10 border border-[#262626]'>
-                    <div className='flex items-center gap-5 px-5 py-3 rounded-xl bg-[#443919]'>
+                    <div className='flex md:items-center gap-5 px-5 py-3 rounded-xl bg-[#443919]'>
                         <div><AiOutlineShareAlt /></div>
                         <h6 className='text-white'>Want to change the referral code that your friends will receive?</h6>
                     </div>
-                    <div onClick={openModal} className='flex items-center text-[#ce9600] justify-between mt-7 hover:bg-[#262626] pr-1 pl-2 py-1 cursor-pointer rounded-lg transition-colors duration-100'>
+                    <div onClick={openModal} className='flex md:items-center text-[#ce9600] justify-between mt-7 hover:bg-[#262626] pr-1 pl-2 py-1 cursor-pointer rounded-lg transition-colors duration-100'>
                         <h6 className='text-white'>Change my referral code</h6>
                         <div className='bg-[#2c281d] rounded-2xl px-2 py-2 flex gap-2 items-center'>
                             <div><AiOutlineShareAlt className='mr-4' /></div>
