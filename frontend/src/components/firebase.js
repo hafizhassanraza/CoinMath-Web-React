@@ -2,10 +2,8 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getAuth } from 'firebase/auth';
-import { getFirestore } from 'firebase/firestore'; // Correct import for Firestore
-
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import { getFirestore } from 'firebase/firestore';
+import { getStorage } from 'firebase/storage'; // Import the correct storage function
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -21,8 +19,9 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
-const db = getFirestore(app); // Initialize Firestore with the new API
+const db = getFirestore(app);
+const storage = getStorage(app); // Initialize storage
 
 export const auth = getAuth();
 export default app;
-export { db };
+export { db, storage };

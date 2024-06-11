@@ -12,20 +12,16 @@ const SignIn = () => {
     const handleSignIn = async (e) => {
         e.preventDefault();
         setError('');
-
+    
         try {
             const q = query(collection(db, 'profiles'), where('email', '==', email));
             const querySnapshot = await getDocs(q);
-
+    
             if (!querySnapshot.empty) {
-                const doc = querySnapshot.docs[0].data();
-                if (doc.pin === pin) {
-                    const token = generateToken();
-                    localStorage.setItem('authToken', token);
-                    navigate('/profile');
-                } else {
-                    setError('Invalid credentials. Please try again.');
-                }
+                const doc = querySnapshot.docs[0];
+                const userId = doc.id; 
+                localStorage.setItem('userId', userId); 
+                navigate('/profile');
             } else {
                 setError('No user found with this email.');
             }
@@ -34,11 +30,7 @@ const SignIn = () => {
             setError('Error verifying user. Please try again later.');
         }
     };
-
-    const generateToken = () => {
-        // Generate a simple token for demonstration purposes
-        return Math.random().toString(36).substr(2);
-    };
+    
 
     return (
         <div className="background">
@@ -76,3 +68,6 @@ const SignIn = () => {
 };
 
 export default SignIn;
+
+
+

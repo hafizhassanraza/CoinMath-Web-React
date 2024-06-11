@@ -5,29 +5,67 @@ import { AiOutlineShareAlt } from "react-icons/ai";
 import { MdRoomPreferences } from "react-icons/md";
 import { db } from '../components/firebase';
 import { RxCross2 } from "react-icons/rx";
+import { doc, getDoc, getDocs } from 'firebase/firestore';
 
 
 const Profile = () => {
     const [profileData, setProfileData] = useState(null);
     const [loading, setLoading] = useState(true);
-    // console.log(db);
+    const [totalReferrals, setTotalReferrals] = useState(0);
+
+    const fetchUserProfile = async () => {
+        try {
+            const userId = localStorage.getItem('userId');
+            const docRef = doc(db, 'profiles', userId);
+            const docSnap = await getDoc(docRef);
+            if (docSnap.exists()) {
+                setProfileData(docSnap.data());
+            } else {
+                console.log('No such document!');
+            }
+        } catch (error) {
+            console.error('Error fetching profile data:', error);
+        }
+    };
+
+    const fetchTotalReferrals = async () => {
+        try {
+            const userId = localStorage.getItem('userId');
+            const userRef = doc(db, 'profiles', userId);
+            const userSnap = await getDoc(userRef);
+            if (userSnap.exists()) {
+                const refCode = userSnap.data().referralCode;
+                const q = query(collection(db, 'profiles'), where('referralCode', '==', refCode));
+                const querySnapshot = await getDocs(q);
+                setTotalReferrals(querySnapshot.size);
+            } else {
+                console.log('No such user document!');
+            }
+        } catch (error) {
+            console.error('Error fetching total referrals:', error);
+        }
+    };
+
 
     useEffect(() => {
-        const storedProfileData = localStorage.getItem('profileData');
-        if (storedProfileData) {
-            const parsedProfileData = JSON.parse(storedProfileData);
-            setProfileData(parsedProfileData);
-        }
-        setLoading(false);
+        fetchTotalReferrals()
+        fetchUserProfile();
     }, []);
+
 
     return (
         <div className='px-3 lg:px-20 mt-5'>
             {profileData && (
                 <>
                     <div className='rounded-xl border border-[#262626] bg-[#1F1F1F]'>
-                        <div className='text-[130px] flex justify-center items-center mt-14 mb-3'>
-                            <FaRegUserCircle className='text-white' />
+                        <div className='text-[130px]  flex justify-center items-center mt-14 mb-3'>
+                            <div>
+                                {profileData.imageUrl ? (
+                                    <img src={profileData.imageUrl} className='rounded-full w-32 h-32' alt="user" />
+                                ) : (
+                                    <FaRegUserCircle className='text-white' />
+                                )}
+                            </div>
                         </div>
                         <div className='mb-8'>
                             <div className='pb-4'>
@@ -39,7 +77,7 @@ const Profile = () => {
                                         <MdOutlineModeEdit className='text-xl' />Update
                                     </button>
                                     <button className='bg-transparent border border-gray-500 px-3 py-1 flex items-center gap-2 rounded-lg text-white cursor-pointer hover:bg-white/10 transition duration-200 ease-in-out'>
-                                       <RxCross2 className='text-xl'/> Delete
+                                        <RxCross2 className='text-xl' /> Delete
                                     </button>
                                 </div>
                             </div>
@@ -71,6 +109,10 @@ const Profile = () => {
                             <div className='lg:pr-40'>
                                 <span className='text-[13px] text-white'>Referral Code</span>
                                 <p className='text-[14px] text-white'>{profileData.referralCode}</p>
+                            </div>
+                            <div className='lg:pr-40'>
+                                <span className='text-[13px] text-white'>Total Refferrals</span>
+                                <p className='text-[14px] text-white'>{totalReferrals}</p>
                             </div>
                         </div>
                     </div>

@@ -26,7 +26,7 @@ function ProfileMenu() {
     const closeMenu = () => setIsMenuOpen(false);
 
     const handleLogout = () => {
-        localStorage.removeItem('authToken');
+        localStorage.removeItem('userId');
         window.location.href = '/signin';
     };
 
