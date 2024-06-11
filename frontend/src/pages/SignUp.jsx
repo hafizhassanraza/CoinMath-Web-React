@@ -14,6 +14,8 @@ const SignUp = () => {
                 <input
                     type="text"
                     placeholder='Enter Your Email...'
+                    // onChange={(e) => setEmail(e.target.value)}
+                    // required
                     className="w-full px-3 rounded-lg py-2 text-white bg-[#363636] focus:outline-none focus:ring-2 focus:ring-[#CE9600] hover:ring-2 hover:ring-[#363636]/30 ease-in-out transition-all"
                 />
                 <label className="flex items-center mt-3">

@@ -1,5 +1,5 @@
 import React from "react";
-import { Navbar, MobileNav, Typography, Button, Menu, MenuHandler, MenuList, MenuItem, Avatar, IconButton } from "@material-tailwind/react";
+import { Navbar, Typography, Button, Menu, MenuHandler, MenuList, MenuItem, Avatar, IconButton, Collapse } from "@material-tailwind/react";
 import { CubeTransparentIcon, UserCircleIcon, CodeBracketSquareIcon, ChevronDownIcon, PowerIcon, Bars2Icon } from "@heroicons/react/24/solid";
 import { Link, useLocation } from 'react-router-dom';
 import { IoNewspaperOutline } from "react-icons/io5";
@@ -8,7 +8,6 @@ import { IoWalletSharp } from "react-icons/io5";
 import { LuCoins } from "react-icons/lu";
 import { MdOutlineHome } from "react-icons/md";
 
-
 const profileMenuItems = [
     {
         label: "View Profile",
@@ -16,9 +15,8 @@ const profileMenuItems = [
         path: '/profile'
     },
     {
-        label: "Login",
+        label: "Logout",
         icon: PowerIcon,
-        path: '/login'
     },
 ];
 
@@ -26,6 +24,11 @@ function ProfileMenu() {
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
     const closeMenu = () => setIsMenuOpen(false);
+
+    const handleLogout = () => {
+        localStorage.removeItem('authToken');
+        window.location.href = '/signin';
+    };
 
     return (
         <Menu open={isMenuOpen} handler={setIsMenuOpen} placement="bottom-end">
@@ -39,9 +42,12 @@ function ProfileMenu() {
                 {profileMenuItems.map(({ label, icon, path }, key) => {
                     const isLastItem = key === profileMenuItems.length - 1;
                     return (
-                        <MenuItem key={label} onClick={closeMenu} className={`flex items-center gap-2 rounded ${isLastItem ? 'hover:bg-red-500/10 focus:bg-red-500/10 active:bg-[#262626]/10' : ''}`}>
+                        <MenuItem 
+                            key={label} 
+                            onClick={isLastItem ? handleLogout : closeMenu} 
+                            className={`flex items-center gap-2 rounded ${isLastItem ? 'hover:bg-red-500/10 focus:bg-red-500/10 active:bg-[#262626]/10' : ''}`}>
                             {React.createElement(icon, { className: `h-4 w-4 ${isLastItem ? 'text-red-500' : ''}`, strokeWidth: 2 })}
-                            <Typography as={Link} to={path} variant="small" className="font-normal" color={isLastItem ? 'red' : 'inherit'}>
+                            <Typography as={isLastItem ? 'div' : Link} to={path} variant="small" className="font-normal" color={isLastItem ? 'red' : 'inherit'}>
                                 {label}
                             </Typography>
                         </MenuItem>
@@ -136,9 +142,9 @@ export function ComplexNavbar() {
                             <ProfileMenu />
                         </div>
                     </div>
-                    <MobileNav open={isNavOpen} className="overflow-scroll">
+                    <Collapse open={isNavOpen} className="overflow-scroll">
                         <NavList />
-                    </MobileNav>
+                    </Collapse>
                 </Navbar>
             </div>
         </>
