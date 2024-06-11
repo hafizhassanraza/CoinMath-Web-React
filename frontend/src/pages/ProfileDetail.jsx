@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { collection, addDoc } from 'firebase/firestore';
+import { collection, addDoc, query, where, getDocs } from 'firebase/firestore';
 import { db } from '../components/firebase';
 import { SiTicktick } from 'react-icons/si';
 import { LuLink } from 'react-icons/lu';
@@ -12,8 +12,6 @@ import { AiOutlineQuestionCircle } from 'react-icons/ai';
 import { TbArrowGuide } from 'react-icons/tb';
 
 const ProfileDetail = () => {
-    // const location = useLocation();
-    // const { userEmail } = location.state || {};
     const navigate = useNavigate()
 
     const [Fname, setFname] = useState('');
@@ -21,58 +19,66 @@ const ProfileDetail = () => {
     const [email, setEmail] = useState('');
     const [pin, setPin] = useState('');
     const [phone, setPhone] = useState('');
+    const [refBy, setRefBy] = useState('');
     const [refCode, setRefCode] = useState('');
-    const [cusCode, setCusCode] = useState('');
-
-    // useEffect(() => {
-    //     console.log("Received userEmail prop:", userEmail);
-    // }, [userEmail]);
 
     const handleProfileDetails = async (e) => {
         e.preventDefault();
-        console.log("Inside handleProfileDetails");
-        console.log("Email:", email);
-        console.log("First Name:", Fname);
-        console.log("Surname:", surName);
-        console.log("Phone:", phone);
-        console.log("Referral Code:", refCode);
-        // console.log("Custom Referral Code:", cusCode);
 
         try {
+            const emailQuerySnapshot = await getDocs(query(collection(db, 'profiles'), where('email', '==', email)));
+            if (!emailQuerySnapshot.empty) {
+                throw new Error('Email already exists');
+            }
+
+            const refCodeQuerySnapshot = await getDocs(query(collection(db, 'profiles'), where('referralCode', '==', refCode)));
+            if (!refCodeQuerySnapshot.empty) {
+                throw new Error('Referral code already exists');
+            }
+
             await addDoc(collection(db, 'profiles'), {
                 email: email,
                 firstName: Fname,
                 surname: surName,
                 pin: pin,
                 phone: phone,
-                referralCode: refCode,
-                // customReferralCode: cusCode
+                referralByCode: refBy,
+                referralCode: refCode
             });
+
             localStorage.setItem('profileData', JSON.stringify({
                 email: email,
                 firstName: Fname,
                 surname: surName,
                 pin: pin,
                 phone: phone,
-                referralCode: refCode,
-                // customReferralCode: cusCode
+                referralByCode: refBy,
+                referralCode: refCode
             }));
 
             console.log("Document successfully written!");
 
             setFname('');
-            setEmail(''),
-                setPin(''),
-                setSurname('');
+            setSurname('');
+            setEmail('');
+            setPin('');
             setPhone('');
+            setRefBy('');
             setRefCode('');
-            // setCusCode('');
-            navigate('/signin')
+
+            navigate('/signin');
         } catch (error) {
             console.error('Error storing profile details:', error);
+            if (error.message === 'Email already exists') {
+                alert('Email already exists');
+            }
+            else if (error.message === 'Referral code already exists') {
+                alert('Referral code already exists');
+            } else {
+                //other errors
+            }
         }
     };
-
     return (
         <div className='px-56'>
             <div className='rounded-b-xl overflow-hidden border border-[#262626]'>
@@ -144,7 +150,7 @@ const ProfileDetail = () => {
                             </div>
                             <div className="pb-5 px-6">
                                 <input
-                                    type="text"
+                                    type="password"
                                     onChange={(e) => setPin(e.target.value)}
                                     value={pin}
                                     required
@@ -158,25 +164,29 @@ const ProfileDetail = () => {
                             </div>
                             <div className="pb-5 px-6">
                                 <input
-                                    type="number"
-                                    onChange={(e) => setPhone(e.target.value)}
+                                    type="text"
+                                    onChange={(e) => {
+                                        const enteredValue = e.target.value.replace(/\D/g, '');
+                                        setPhone(enteredValue);
+                                    }}
                                     value={phone}
                                     required
                                     className="w-full px-3 rounded-lg py-2 text-white bg-[#363636] focus:outline-none focus:ring-2 focus:ring-[#CE9600] hover:ring-2 hover:ring-[#363636]/30 ease-in-out transition-all"
+                                    pattern="[0-9]*"
                                 />
+
                             </div>
                         </div>
                         <div className='border-b-2 border-[#262626] mx-5 mb-2'></div>
                         <div>
                             <div className="relative px-6 pt-2 mb-3 flex text-white">
-                                <h6 className="font-bold text-[16px]">Referred by a friend?</h6>
+                                <h6 className="font-bold text-[16px]">Referred by a friend? (Optional)</h6>
                             </div>
                             <div className="pb-5 px-6">
                                 <input
                                     type="text"
-                                    onChange={(e) => setRefCode(e.target.value)}
-                                    value={refCode}
-                                    required
+                                    onChange={(e) => setRefBy(e.target.value)}
+                                    value={refBy}
                                     placeholder='Enter your referral code here...'
                                     className="w-full px-3 rounded-lg py-2 text-white bg-[#363636] focus:outline-none focus:ring-2 focus:ring-[#CE9600] hover:ring-2 hover:ring-[#363636]/30 ease-in-out transition-all"
                                 />
@@ -189,13 +199,13 @@ const ProfileDetail = () => {
                         </div>
                         <div className=''>
                             <div className="relative px-6 pt-2 mb-3 flex text-white">
-                                <h6 className="font-bold text-[16px]">Change My Custom Referral Code</h6>
+                                <h6 className="font-bold text-[16px]">My Custom Referral Code</h6>
                             </div>
                             <div className="pb-5 px-6">
                                 <input
                                     type="text"
-                                    onChange={(e) => setCusCode(e.target.value)}
-                                    value={cusCode}
+                                    onChange={(e) => setRefCode(e.target.value)}
+                                    value={refCode}
                                     required
                                     placeholder='Enter your custom referral code here...'
                                     className="w-full px-3 rounded-lg py-2 text-white bg-[#363636] focus:outline-none focus:ring-2 focus:ring-[#CE9600] hover:ring-2 hover:ring-[#363636]/30 ease-in-out transition-all"
@@ -204,7 +214,6 @@ const ProfileDetail = () => {
                         </div>
 
                         <div className="mb-10 mt-4">
-                            {/* <Link to='/profile'> */}
                             <div className="flex items-center bg-[#CE9600] hover:bg-[#CE9600]/90 justify-center mx-5 md:mx-0  my-3 lg:mx-80 rounded-lg cursor-pointer  border-solid border-blueGray-200">
                                 <button
                                     className="text-white flex items-center gap-2 background-transparent font-bold  px-6 py-2.5 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
@@ -213,7 +222,6 @@ const ProfileDetail = () => {
                                     <SiTicktick />Onboard me!
                                 </button>
                             </div>
-                            {/* </Link> */}
                         </div>
                         <p className='text-[11px] md:text-[13px] text-center mt-2 text-white mb-6'>Already have an account? <Link to="/signin"><span className='text-gray-700 hover:underline cursor-pointer font-bold'>Sign In</span></Link></p>
 

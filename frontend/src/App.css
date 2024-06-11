@@ -89,4 +89,25 @@ body{
 .credit {
   margin: 10px;
 }
+.phone-input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #363636;
+    border: 1px solid transparent;
+    color: white;
+    outline: none;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    transition: all 0.3s ease-in-out;
+}
 
+.phone-input:focus {
+    outline: none;
+    border-color: #CE9600;
+}
+
+.phone-input:hover {
+    outline: none;
+    border-color: #fff;
+}
