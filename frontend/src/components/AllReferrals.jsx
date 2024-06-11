@@ -1,17 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { FaRegUserCircle } from "react-icons/fa";
-import { MdOutlineModeEdit } from "react-icons/md";
-import { AiOutlineShareAlt } from "react-icons/ai";
-import { MdRoomPreferences } from "react-icons/md";
 import { db } from '../components/firebase';
-import { RxCross2 } from "react-icons/rx";
-import { doc, getDoc, getDocs } from 'firebase/firestore';
-
+import { doc, getDoc, getDocs, collection, query, where } from 'firebase/firestore';
 
 const AllReferrals = () => {
     const [profileData, setProfileData] = useState(null);
+    const [referrals, setReferrals] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [totalReferrals, setTotalReferrals] = useState(0);
 
     const fetchUserProfile = async () => {
         try {
@@ -28,30 +23,29 @@ const AllReferrals = () => {
         }
     };
 
-    const fetchTotalReferrals = async () => {
+    const fetchReferrals = async () => {
         try {
             const userId = localStorage.getItem('userId');
             const userRef = doc(db, 'profiles', userId);
             const userSnap = await getDoc(userRef);
             if (userSnap.exists()) {
                 const refCode = userSnap.data().referralCode;
-                const q = query(collection(db, 'profiles'), where('referralCode', '==', refCode));
+                const q = query(collection(db, 'profiles'), where('referralByCode', '==', refCode));
                 const querySnapshot = await getDocs(q);
-                setTotalReferrals(querySnapshot.size);
+                const referralsList = querySnapshot.docs.map(doc => doc.data());
+                setReferrals(referralsList);
             } else {
                 console.log('No such user document!');
             }
         } catch (error) {
-            console.error('Error fetching total referrals:', error);
+            console.error('Error fetching referrals:', error);
         }
     };
 
-
     useEffect(() => {
-        fetchTotalReferrals()
         fetchUserProfile();
+        fetchReferrals();
     }, []);
-
 
     return (
         <div className='px-3 lg:px-20 mt-5'>
@@ -74,66 +68,25 @@ const AllReferrals = () => {
                         </div>
                     </div>
                     <div className='bg-[#1F1F1F] rounded-xl mt-8 pb-4 px-10 border border-[#262626]'>
-
-
-
-
-
-
-
-
-                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 pt-4">
-                            <div className='bg-[#363636] rounded-xl p-2 cursor-pointer'>
-                                <div className='flex flex-col gap-8 md:flex md:flex-row lg:items-center'>
-                                    <div className=''>
-                                        <p className='text-[14px] text-white w-10 h-10 bg-red-400 rounded-full'>gh</p>
-                                    </div>
-                                    <div className='text-white flex flex-col gap-1'>
-                                        <p>Name</p>
-                                        <p className='text-sm'>surname</p>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 pt-4">
+                            {referrals.map((referral, index) => (
+                                <div key={index} className='bg-[#363636] rounded-xl p-2'>
+                                    <div className='flex flex-col gap-4 md:flex md:flex-row lg:items-center'>
+                                        <div className=''>
+                                            {referral.imageUrl ? (
+                                                <img src={referral.imageUrl} className='w-10 h-10 rounded-full' alt="referral" />
+                                            ) : (
+                                                <FaRegUserCircle className='text-white w-10 h-10' />
+                                            )}
+                                        </div>
+                                        <div className='text-white flex flex-col gap-1'>
+                                            <p>{referral.firstName}</p>
+                                            <p className='text-sm'>{referral.surname}</p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div className='bg-[#363636] rounded-xl p-2 cursor-pointer'>
-                                <div className='flex flex-col gap-8 md:flex md:flex-row lg:items-center'>
-                                    <div className=''>
-                                        <p className='text-[14px] text-white w-10 h-10 bg-red-400 rounded-full'>gh</p>
-                                    </div>
-                                    <div className='text-white flex flex-col gap-1'>
-                                        <p>Name</p>
-                                        <p className='text-sm'>surname</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className='bg-[#363636] rounded-xl p-2 cursor-pointer'>
-                                <div className='flex flex-col gap-8 md:flex md:flex-row lg:items-center'>
-                                    <div className=''>
-                                        <p className='text-[14px] text-white w-10 h-10 bg-red-400 rounded-full'>gh</p>
-                                    </div>
-                                    <div className='text-white flex flex-col gap-1'>
-                                        <p>Name</p>
-                                        <p className='text-sm'>surname</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className='bg-[#363636] rounded-xl p-2 cursor-pointer'>
-                                <div className='flex flex-col gap-8 md:flex md:flex-row lg:items-center '>
-                                    <div className=''>
-                                        <p className='text-[14px] text-white w-10 h-10 bg-red-400 rounded-full'>gh</p>
-                                    </div>
-                                    <div className='text-white flex flex-col gap-1'>
-                                        <p>Name</p>
-                                        <p className='text-sm'>surname</p>
-                                    </div>
-                                </div>
-                            </div>
+                            ))}
                         </div>
-
-
-
-
-
-
                     </div>
                 </>
             )}
@@ -142,4 +95,3 @@ const AllReferrals = () => {
 };
 
 export default AllReferrals;
-
