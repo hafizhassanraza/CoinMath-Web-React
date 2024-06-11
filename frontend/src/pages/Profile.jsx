@@ -5,7 +5,7 @@ import { AiOutlineShareAlt } from "react-icons/ai";
 import { MdRoomPreferences } from "react-icons/md";
 import { db } from '../components/firebase';
 import { RxCross2 } from "react-icons/rx";
-import { doc, getDoc, getDocs } from 'firebase/firestore';
+import { collection, doc, getDoc, getDocs, query, where } from 'firebase/firestore';
 
 
 const Profile = () => {
@@ -27,24 +27,21 @@ const Profile = () => {
             console.error('Error fetching profile data:', error);
         }
     };
-
     const fetchTotalReferrals = async () => {
         try {
             const userId = localStorage.getItem('userId');
-            const userRef = doc(db, 'profiles', userId);
-            const userSnap = await getDoc(userRef);
-            if (userSnap.exists()) {
-                const refCode = userSnap.data().referralCode;
-                const q = query(collection(db, 'profiles'), where('referralCode', '==', refCode));
-                const querySnapshot = await getDocs(q);
-                setTotalReferrals(querySnapshot.size);
-            } else {
-                console.log('No such user document!');
-            }
+            const q = query(collection(db, 'profiles'), where('referrerID', '==', userId));
+            const querySnapshot = await getDocs(q);
+            const totalReferralsCount = querySnapshot.size;
+            console.log('Total Referrals:', totalReferralsCount); // Log totalReferralsCount to console
+            setTotalReferrals(totalReferralsCount);
         } catch (error) {
             console.error('Error fetching total referrals:', error);
         }
     };
+
+    
+    
 
 
     useEffect(() => {

@@ -21,6 +21,7 @@ const ProfileDetail = () => {
     const [image, setImage] = useState(null);
     const [chosenImage, setChosenImage] = useState(null);
     const [referralCodeExists, setReferralCodeExists] = useState(false);
+    const [referrerID, setReferrerID] = useState(null);
 
     const handleProfileDetails = async (e) => {
         e.preventDefault();
@@ -32,9 +33,13 @@ const ProfileDetail = () => {
             }
 
             const refCodeQuerySnapshot = await getDocs(query(collection(db, 'profiles'), where('referralCode', '==', refCode)));
-            if (!referralCodeExists) {
+            if (!refCodeQuerySnapshot.empty) {
+                throw new Error('Referral code already exists');
+            }
+
+            if (refBy && !referralCodeExists) {
                 alert('Friend Referral code does not exist');
-                return; // Prevent form submission if referral code does not exist
+                return;
             }
 
             const imageRef = await uploadImage();
@@ -46,9 +51,9 @@ const ProfileDetail = () => {
                 phone: phone,
                 referralByCode: refBy,
                 referralCode: refCode,
-                imageUrl: imageRef
+                imageUrl: imageRef,
+                referrerID: referrerID
             });
-
             console.log("Document successfully written!");
 
             setFname('');
@@ -65,14 +70,13 @@ const ProfileDetail = () => {
             console.error('Error storing profile details:', error);
             if (error.message === 'Email already exists') {
                 alert('Email already exists');
-            }
-            else {
+            } else if (error.message === 'Referral code already exists') {
+                alert('Referral code already exists');
+            } else {
                 console.log(error.message, "Other errors");
             }
         }
     };
-
-
 
     const handleImageChange = (e) => {
         const file = e.target.files[0];
@@ -81,7 +85,7 @@ const ProfileDetail = () => {
     };
 
     const uploadImage = async () => {
-        if (!image) return ''; 
+        if (!image) return '';
 
         const storageRef = ref(storage, `images/${image.name}`);
         await uploadBytes(storageRef, image);
@@ -90,15 +94,18 @@ const ProfileDetail = () => {
 
     const checkReferralCode = async () => {
         if (!refBy) return;
-    
+
         const refCodeQuerySnapshot = await getDocs(query(collection(db, 'profiles'), where('referralCode', '==', refBy)));
         if (refCodeQuerySnapshot.empty) {
+            setReferralCodeExists(false);
+            setReferrerID(null);
             alert('Friend Referral code does not exist');
         } else {
             setReferralCodeExists(true);
+            const doc = refCodeQuerySnapshot.docs[0];
+            setReferrerID(doc.id);
         }
     };
-    
 
     return (
         <div className='px-56'>
@@ -122,40 +129,40 @@ const ProfileDetail = () => {
             </div>
             <div className='flex justify-center items-center gap-6 bg-[#1F1F1F] rounded-xl my-7   border border-[#262626]'>
                 <form onSubmit={handleProfileDetails} className='  bg-[#1F1F1F]'>
-                    {/* <div className=''> */}
                     <div className=''>
-                        <div className="relative px-6 pt-6 mb-3 flex text-white">
-                            <h6 className="font-bold text-[16px]">First Name</h6>
+                        <div className=''>
+                            <div className="relative px-6 pt-6 mb-3 flex text-white">
+                                <h6 className="font-bold text-[16px]">First Name</h6>
+                            </div>
+                            <div className="pb-5 px-6">
+                                <input
+                                    type="text"
+                                    onChange={(e) => setFname(e.target.value)}
+                                    value={Fname}
+                                    required
+                                    className="w-full px-3 rounded-lg py-2 text-white bg-[#363636] focus:outline-none focus:ring-2 focus:ring-[#CE9600] hover:ring-2 hover:ring-[#363636]/30 ease-in-out transition-all"
+                                />
+                            </div>
                         </div>
-                        <div className="pb-5 px-6">
-                            <input
-                                type="text"
-                                onChange={(e) => setFname(e.target.value)}
-                                value={Fname}
-                                required
-                                className="w-full px-3 rounded-lg py-2 text-white bg-[#363636] focus:outline-none focus:ring-2 focus:ring-[#CE9600] hover:ring-2 hover:ring-[#363636]/30 ease-in-out transition-all"
-                            />
+                        <div className=''>
+                            <div className="relative px-6 pt-2 mb-3 flex text-white">
+                                <h6 className="font-bold text-[16px]">Surname</h6>
+                            </div>
+                            <div className="pb-5 px-6">
+                                <input
+                                    type="text"
+                                    onChange={(e) => setSurname(e.target.value)}
+                                    value={surName}
+                                    required
+                                    className="w-full px-3 rounded-lg py-2 text-white bg-[#363636] focus:outline-none focus:ring-2 focus:ring-[#CE9600] hover:ring-2 hover:ring-[#363636]/30 ease-in-out transition-all"
+                                />
+                            </div>
                         </div>
-                    </div>
-                    <div className=''>
-                        <div className="relative px-6 pt-2 mb-3 flex text-white">
-                            <h6 className="font-bold text-[16px]">Surname</h6>
-                        </div>
-                        <div className="pb-5 px-6">
-                            <input
-                                type="text"
-                                onChange={(e) => setSurname(e.target.value)}
-                                value={surName}
-                                required
-                                className="w-full px-3 rounded-lg py-2 text-white bg-[#363636] focus:outline-none focus:ring-2 focus:ring-[#CE9600] hover:ring-2 hover:ring-[#363636]/30 ease-in-out transition-all"
-                            />
-                        </div>
-                    </div>
-                    <div>
-                        <div className="relative px-6 pt-2 mb-3 flex text-white">
-                            <h6 className="font-bold text-[16px]">Profile Image</h6>
-                        </div>
-                        <div className="pb-5 px-6">
+                        <div>
+                            <div className="relative px-6 pt-2 mb-3 flex text-white">
+                                <h6 className="font-bold text-[16px]">Profile Image</h6>
+                            </div>
+                            <div className="pb-5 px-6">
                                 <div className="flex items-center justify-center">
                                     <label className="w-full flex gap-3 items-center px-3 py-2 bg-[#363636] text-white rounded-lg cursor-pointer hover:bg-[#4a4a4a] focus-within:ring-2 focus-within:ring-[#CE9600] hover:ring-2 hover:ring-[#363636]/30 transition-all ease-in-out">
                                         <FaImage className="text-xl mb-1 text-[#5F5F5F]" />
@@ -171,6 +178,7 @@ const ProfileDetail = () => {
                                     </label>
                                 </div>
                             </div>
+                        </div>
                         <div className=''>
                             <div className="relative px-6 pt-2 mb-3 flex text-white">
                                 <h6 className="font-bold text-[16px]">Email</h6>
@@ -253,21 +261,19 @@ const ProfileDetail = () => {
                                 />
                             </div>
                         </div>
-
                         <div className="mb-10 mt-4">
                             <div className="flex items-center justify-center ">
                                 <button
                                     className="text-white px-48 bg-[#CE9600] hover:bg-[#CE9600]/90 justify-center mx-5 md:mx-0  my-3 lg:mx-80 rounded-lg cursor-pointer border-solid border-blueGray-200 flex items-center gap-2 background-transparent font-bold  py-2.5 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                                     type="submit"
-                                    disabled={!referralCodeExists}
-                                    style={{ cursor: !referralCodeExists ? 'not-allowed' : 'pointer' }}
+                                    disabled={refBy && !referralCodeExists}
+                                    style={{ cursor: refBy && !referralCodeExists ? 'not-allowed' : 'pointer' }}
                                 >
-                                     <SiTicktick />  Onboard me!
+                                    <SiTicktick />  Onboard me!
                                 </button>
                             </div>
                         </div>
                         <p className='text-[11px] md:text-[13px] text-center mt-2 text-white mb-6'>Already have an account? <Link to="/signin"><span className='text-gray-700 hover:underline cursor-pointer font-bold'>Sign In</span></Link></p>
-
                     </div>
                 </form>
             </div>
