@@ -25,8 +25,14 @@ const ProfileDetail = () => {
 
     const handleProfileDetails = async (e) => {
         e.preventDefault();
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
         try {
+
+            if (!emailPattern.test(email)) {
+                throw new Error('Invalid email format.');
+            }
+
             const emailQuerySnapshot = await getDocs(query(collection(db, 'profiles'), where('email', '==', email)));
             if (!emailQuerySnapshot.empty) {
                 throw new Error('Email already exists');
@@ -72,6 +78,9 @@ const ProfileDetail = () => {
                 alert('Email already exists');
             } else if (error.message === 'Referral code already exists') {
                 alert('Referral code already exists');
+            }
+            else if ("Invalid email format.") {
+                alert("Invalid email format.")
             } else {
                 console.log(error.message, "Other errors");
             }

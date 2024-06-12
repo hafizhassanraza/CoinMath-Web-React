@@ -12,25 +12,25 @@ const SignIn = () => {
     const handleSignIn = async (e) => {
         e.preventDefault();
         setError('');
-    
+
         try {
-            const q = query(collection(db, 'profiles'), where('email', '==', email));
+            const q = query(collection(db, 'profiles'), where('email', '==', email), where('pin', '==', pin));
             const querySnapshot = await getDocs(q);
-    
+
             if (!querySnapshot.empty) {
                 const doc = querySnapshot.docs[0];
-                const userId = doc.id; 
-                localStorage.setItem('userId', userId); 
+                const userId = doc.id;
+                localStorage.setItem('userId', userId);
                 navigate('/profile');
             } else {
-                setError('No user found with this email.');
+                setError('Invalid email or pin.');
             }
         } catch (error) {
             console.error('Error verifying user:', error);
             setError('Error verifying user. Please try again later.');
         }
     };
-    
+
 
     return (
         <div className="background">

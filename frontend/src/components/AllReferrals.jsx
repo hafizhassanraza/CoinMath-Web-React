@@ -8,41 +8,36 @@ const AllReferrals = () => {
     const [referrals, setReferrals] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    const fetchUserProfile = async () => {
-        try {
-            const userId = localStorage.getItem('userId');
-            const docRef = doc(db, 'profiles', userId);
-            const docSnap = await getDoc(docRef);
-            if (docSnap.exists()) {
-                setProfileData(docSnap.data());
-            } else {
-                console.log('No such document!');
+    useEffect(() => {
+        const fetchUserProfile = async () => {
+            try {
+                const userId = localStorage.getItem('userId');
+                const docRef = doc(db, 'profiles', userId);
+                const docSnap = await getDoc(docRef);
+                if (docSnap.exists()) {
+                    setProfileData(docSnap.data());
+                } else {
+                    console.log('No such document!');
+                }
+            } catch (error) {
+                console.error('Error fetching profile data:', error);
             }
-        } catch (error) {
-            console.error('Error fetching profile data:', error);
-        }
-    };
+        };
 
-    const fetchReferrals = async () => {
-        try {
-            const userId = localStorage.getItem('userId');
-            const userRef = doc(db, 'profiles', userId);
-            const userSnap = await getDoc(userRef);
-            if (userSnap.exists()) {
-                const refCode = userSnap.data().referralCode;
-                const q = query(collection(db, 'profiles'), where('referralByCode', '==', refCode));
+        const fetchReferrals = async () => {
+            try {
+                const userId = localStorage.getItem('userId');
+                const q = query(collection(db, 'profiles'), where('referrerID', '==', userId));
                 const querySnapshot = await getDocs(q);
                 const referralsList = querySnapshot.docs.map(doc => doc.data());
                 setReferrals(referralsList);
-            } else {
-                console.log('No such user document!');
+            } catch (error) {
+                console.error('Error fetching referrals:', error);
             }
-        } catch (error) {
-            console.error('Error fetching referrals:', error);
-        }
-    };
+        };
 
-    useEffect(() => {
+
+
         fetchUserProfile();
         fetchReferrals();
     }, []);
