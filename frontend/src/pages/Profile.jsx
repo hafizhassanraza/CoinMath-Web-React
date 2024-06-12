@@ -1,17 +1,40 @@
 import React, { useState, useEffect } from 'react';
-import { FaRegUserCircle } from "react-icons/fa";
+import { FaArrowRight, FaRegUserCircle } from "react-icons/fa";
 import { MdOutlineModeEdit } from "react-icons/md";
 import { AiOutlineShareAlt } from "react-icons/ai";
 import { MdRoomPreferences } from "react-icons/md";
 import { db } from '../components/firebase';
 import { RxCross2 } from "react-icons/rx";
 import { collection, doc, getDoc, getDocs, query, where } from 'firebase/firestore';
+import Modal from '../components/Modal';
+import SideModal from '../components/SideModal';
 
 
 const Profile = () => {
     const [profileData, setProfileData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [totalReferrals, setTotalReferrals] = useState(0);
+    const [showModal, setShowModal] = useState(false);
+    const [showSideModal, setShowSideModal] = useState(false);
+
+    // Function to open the modal
+    const openModal = () => {
+        setShowModal(true);
+    };
+
+    // Function to close the modal
+    const closeModal = () => {
+        setShowModal(false);
+    };
+
+    const openSideModal = () => {
+        setShowSideModal(true);
+    };
+
+    // Function to close the modal
+    const closeSideModal = () => {
+        setShowSideModal(false);
+    };
 
     const fetchUserProfile = async () => {
         try {
@@ -33,15 +56,13 @@ const Profile = () => {
             const q = query(collection(db, 'profiles'), where('referrerID', '==', userId));
             const querySnapshot = await getDocs(q);
             const totalReferralsCount = querySnapshot.size;
-            console.log('Total Referrals:', totalReferralsCount); // Log totalReferralsCount to console
+            console.log('Total Referrals:', totalReferralsCount);
             setTotalReferrals(totalReferralsCount);
         } catch (error) {
             console.error('Error fetching total referrals:', error);
         }
     };
 
-    
-    
 
 
     useEffect(() => {
@@ -113,12 +134,12 @@ const Profile = () => {
                             </div>
                         </div>
                     </div>
-                    <div className='bg-[#1F1F1F] text-[#ce9600] rounded-xl mt-7 mb-5 py-8 px-10 border border-[#262626]'>
+                    <div  className='bg-[#1F1F1F] text-[#ce9600] rounded-xl mt-7 mb-5 py-8 px-10 border border-[#262626]'>
                         <div className='flex md:items-center gap-5 px-5 py-3 rounded-xl bg-[#443919]'>
                             <div><AiOutlineShareAlt /></div>
                             <h6 className='text-white'>Want to change the referral code that your friends will receive?</h6>
                         </div>
-                        <div className='flex md:items-center text-[#ce9600] justify-between mt-7 hover:bg-[#262626] pr-1 pl-2 py-1 cursor-pointer rounded-lg transition-colors duration-100'>
+                        <div onClick={openModal} className='flex md:items-center text-[#ce9600] justify-between mt-7 hover:bg-[#262626] pr-1 pl-2 py-1 cursor-pointer rounded-lg transition-colors duration-100'>
                             <h6 className='text-white'>Change my referral code</h6>
                             <div className='bg-[#2c281d] rounded-2xl px-2 py-2 flex gap-2 items-center'>
                                 <div><AiOutlineShareAlt className='mr-4' /></div>
@@ -127,16 +148,18 @@ const Profile = () => {
                     </div>
                     <div className='bg-[#1F1F1F] text-[#ce9600] rounded-xl mt-7 mb-5 py-8 px-10 border border-[#262626]'>
                         <div className='flex items-center gap-5 px-5 py-3 rounded-xl bg-[#443919]'>
-                            <div><MdRoomPreferences /></div>
+                            <div><FaArrowRight /></div>
                             <h6 className='text-white'>Forgot to include a referral code during onboarding? No problem!</h6>
                         </div>
-                        <div className='flex items-center text-[#ce9600] justify-between mt-7 hover:bg-[#262626] pr-1 pl-2 py-1 cursor-pointer rounded-lg transition-colors duration-100'>
+                        <div onClick={openSideModal} className='flex items-center text-[#ce9600] justify-between mt-7 hover:bg-[#262626] pr-1 pl-2 py-1 cursor-pointer rounded-lg transition-colors duration-100'>
                             <h6 className='text-white'>Update Referral Code</h6>
-                            <div className='bg-[#2c281d] rounded-2xl px-2 py-2 flex gap-2 items-center'>
-                                <div><MdRoomPreferences className='mr-4' /></div>
+                            <div className='bg-[#2c281d] rounded-2xl px-2 py-3 flex gap-2 items-center'>
+                                <div><FaArrowRight /></div>
                             </div>
                         </div>
                     </div>
+                    {showModal && <Modal closeModal={closeModal} />}
+                    {showSideModal && <SideModal closeSideModal={closeSideModal} />}
                 </>
             )}
         </div>
