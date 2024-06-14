@@ -49,18 +49,18 @@ const Modal = ({ closeModal }) => {
 
             batch.set(userRef, { referralCode: newReferralCode }, { merge: true });
 
-            const referredUsersQuery = query(collection(db, 'profiles'), where('referredBy', '==', referralCode));
+            const referredUsersQuery = query(collection(db, 'profiles'), where('referralByCode', '==', referralCode));
             const referredUsersSnapshot = await getDocs(referredUsersQuery);
 
             referredUsersSnapshot.forEach((docSnapshot) => {
                 const referredUserRef = doc(db, 'profiles', docSnapshot.id);
-                batch.update(referredUserRef, { referredBy: newReferralCode });
+                batch.update(referredUserRef, { referralByCode: newReferralCode });
             });
 
             await batch.commit();
 
             setReferralCode(newReferralCode);
-            setNewReferralCode('');
+            setNewReferralCode(''); 
             setError('');
             closeModal();
         } catch (error) {
@@ -117,14 +117,6 @@ const Modal = ({ closeModal }) => {
                                     Save
                                 </button>
                             </div>
-                            {/* <div onClick={closeModal} className="flex items-center justify-center my-3 mx-20 lg:mx-64 md:mx-52 rounded-lg cursor-pointer border-solid border-blueGray-200">
-                                <button
-                                    className="text-white flex items-center gap-2 background-transparent font-bold uppercase px-6 py-2.5 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                                    type="button"
-                                >
-                                    <MdOutlineCancelScheduleSend /> Cancel
-                                </button>
-                            </div> */}
                         </div>
                     </div>
                 </div>

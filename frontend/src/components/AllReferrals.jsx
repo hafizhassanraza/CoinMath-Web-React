@@ -30,6 +30,7 @@ const AllReferrals = () => {
                 const q = query(collection(db, 'profiles'), where('referrerID', '==', userId));
                 const querySnapshot = await getDocs(q);
                 const referralsList = querySnapshot.docs.map(doc => doc.data());
+                console.log(referralsList);
                 setReferrals(referralsList);
             } catch (error) {
                 console.error('Error fetching referrals:', error);

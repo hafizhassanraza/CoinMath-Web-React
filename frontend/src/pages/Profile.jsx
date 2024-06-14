@@ -17,12 +17,10 @@ const Profile = () => {
     const [showModal, setShowModal] = useState(false);
     const [showSideModal, setShowSideModal] = useState(false);
 
-    // Function to open the modal
     const openModal = () => {
         setShowModal(true);
     };
 
-    // Function to close the modal
     const closeModal = () => {
         setShowModal(false);
     };
@@ -31,7 +29,6 @@ const Profile = () => {
         setShowSideModal(true);
     };
 
-    // Function to close the modal
     const closeSideModal = () => {
         setShowSideModal(false);
     };
@@ -50,6 +47,7 @@ const Profile = () => {
             console.error('Error fetching profile data:', error);
         }
     };
+    
     const fetchTotalReferrals = async () => {
         try {
             const userId = localStorage.getItem('userId');
@@ -153,8 +151,8 @@ const Profile = () => {
                         </div>
                         <div onClick={openSideModal} className='flex items-center text-[#ce9600] justify-between mt-7 hover:bg-[#262626] pr-1 pl-2 py-1 cursor-pointer rounded-lg transition-colors duration-100'>
                             <h6 className='text-white'>Update Referral Code</h6>
-                            <div className='bg-[#2c281d] rounded-2xl px-2 py-3 flex gap-2 items-center'>
-                                <div><FaArrowRight /></div>
+                            <div className='bg-[#2c281d] rounded-2xl px-2 py-2 flex gap-2 items-center'>
+                                <div><FaArrowRight className='mr-4' /></div>
                             </div>
                         </div>
                     </div>
