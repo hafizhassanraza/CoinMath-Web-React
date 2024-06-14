@@ -16,6 +16,7 @@ import SignUp from './pages/SignUp';
 import EmailChecker from './pages/EmailChecker';
 import ProfileDetail from './pages/ProfileDetail';
 import AllReferrals from './components/AllReferrals';
+import UpdateProfile from './components/UpdateProfile';
 
 function NavbarControl() {
     const location = useLocation();
@@ -36,6 +37,7 @@ function App() {
                     <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
                     <Route path="/all-referrals" element={<ProtectedRoute><AllReferrals /></ProtectedRoute>} />
                     <Route path="/token" element={<ProtectedRoute><Token /></ProtectedRoute>} />
+                    <Route path="/update-profile" element={<ProtectedRoute><UpdateProfile /></ProtectedRoute>} />
                     
                     <Route element={<GuestRoute />}>
                         <Route path="/signin" element={<SignIn />} />

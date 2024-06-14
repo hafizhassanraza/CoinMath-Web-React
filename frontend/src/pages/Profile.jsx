@@ -7,7 +7,7 @@ import { RxCross2 } from 'react-icons/rx';
 import { collection, doc, getDoc, getDocs, query, where, writeBatch, deleteDoc } from 'firebase/firestore';
 import Modal from '../components/Modal';
 import SideModal from '../components/SideModal';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Profile = () => {
     const [profileData, setProfileData] = useState(null);
@@ -120,10 +120,12 @@ const Profile = () => {
                             </div>
                             <div className='flex justify-center items-center'>
                                 <div className='flex gap-2 md:mt-2'>
-                                    <button className='bg-[#ce9600] px-3 py-2 rounded-lg cursor-pointer text-white flex items-center gap-2 hover:bg-[#ce9600]/90 transition duration-200 ease-in-out'>
-                                        <MdOutlineModeEdit className='text-xl' />
-                                        Update
-                                    </button>
+                                    <Link to="/update-profile">
+                                        <button className='bg-[#ce9600] px-3 py-2 rounded-lg cursor-pointer text-white flex items-center gap-2 hover:bg-[#ce9600]/90 transition duration-200 ease-in-out'>
+                                            <MdOutlineModeEdit className='text-xl' />
+                                            Update
+                                        </button>
+                                    </Link>
                                     <button
                                         onClick={deleteUserHandler}
                                         className='bg-transparent border border-gray-500 px-3 py-1 flex items-center gap-2 rounded-lg text-white cursor-pointer hover:bg-white/10 transition duration-200 ease-in-out'
