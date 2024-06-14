@@ -37,34 +37,39 @@ const SideModel = ({ closeSideModal }) => {
             setError('Please enter a new referral code.');
             return;
         }
-
+    
+        if (currentUser.referralCode === newRefBy) {
+            setError('You cannot enter your own referral code.');
+            return;
+        }
+    
         try {
             const refCodeQuerySnapshot = await getDocs(query(collection(db, 'profiles'), where('referralCode', '==', newRefBy)));
             if (refCodeQuerySnapshot.empty) {
                 setError('Friend Referral code does not exist.');
                 return;
             }
-
+    
             const newReferrerDoc = refCodeQuerySnapshot.docs[0];
             const newReferrerID = newReferrerDoc.id;
-
+    
             const userDoc = doc(db, 'profiles', currentUser.id);
             await updateDoc(userDoc, {
                 referralByCode: newRefBy,
                 referrerID: newReferrerID
             });
-
-            if (currentUser.referrerID) {
+    
+            if (currentUser.referrerID && currentUser.referrerID !== newReferrerID) {
                 const oldReferrerDoc = doc(db, 'profiles', currentUser.referrerID);
                 await updateDoc(oldReferrerDoc, {
                     referralCount: increment(-1)
                 });
             }
-
+    
             await updateDoc(newReferrerDoc.ref, {
                 referralCount: increment(1)
             });
-
+    
             setError('');
             closeSideModal();
         } catch (error) {
@@ -72,6 +77,7 @@ const SideModel = ({ closeSideModal }) => {
             setError('An error occurred while updating the referral code.');
         }
     };
+    
 
     return (
         <>
