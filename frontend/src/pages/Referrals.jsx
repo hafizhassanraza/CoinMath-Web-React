@@ -1,11 +1,32 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import banner from '../assets/images/banner.webp'
 import { LuCopy } from "react-icons/lu";
 import { IoShareSocialOutline } from "react-icons/io5";
 import { Link } from 'react-router-dom';
+import { collection, doc, getDoc, getDocs, query, where, writeBatch, deleteDoc } from 'firebase/firestore';
+import { db } from '../components/firebase';
+
 
 
 const Referrals = () => {
+    const [totalReferrals, setTotalReferrals] = useState(0);
+
+    const fetchTotalReferrals = async () => {
+        try {
+            const userId = localStorage.getItem('userId');
+            const q = query(collection(db, 'profiles'), where('referrerID', '==', userId));
+            const querySnapshot = await getDocs(q);
+            setTotalReferrals(querySnapshot.size);
+        } catch (error) {
+            console.error('Error fetching total referrals:', error);
+        }
+    };
+
+    useEffect(() => {
+        fetchTotalReferrals();
+    }, []);
+
+
     return (
         <>
             <div className='px-3 lg:px-20 mt-5'>
@@ -40,7 +61,7 @@ const Referrals = () => {
                     <div className='overflow-hidden flex justify-between items-center rounded-lg border border-[#262626] px-6 w-[80%] md:w-[50%] py-2'>
                         <div>
                             <span className='text-white text-[12px]'>You've referred</span>
-                            <h6 className='text-white text-xl font-bold'>0</h6>
+                            <h6 className='text-white text-xl font-bold'>{totalReferrals}</h6>
                             <span className='text-white text-[12px]'>people to CoinMath.</span>
                         </div>
                         <div>

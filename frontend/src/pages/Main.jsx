@@ -9,6 +9,7 @@ import { FaTelegramPlane } from "react-icons/fa";
 import { SiGmail } from "react-icons/si";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
 import { TbArrowGuide } from "react-icons/tb";
+import { Link } from 'react-router-dom';
 
 
 
@@ -33,7 +34,7 @@ const Main = () => {
                             <div className='mt-5 md:mt-0'>
                                 <div className='flex gap-2 md:mt-2'>
                                     <button className='bg-[#ce9600] px-3 py-2 rounded-lg cursor-pointer text-white flex items-center gap-2 hover:bg-[#ce9600]/90 transition duration-200 ease-in-out'><AiOutlineQuestionCircle className='text-xl' />About</button>
-                                    <button className='bg-transparent border border-gray-500 px-3 py-1 rounded-lg flex items-center gap-2 text-white cursor-pointer hover:bg-white/10 transition duration-200 ease-in-out'><TbArrowGuide className='text-xl'/>
+                                    <button className='bg-transparent border border-gray-500 px-3 py-1 rounded-lg flex items-center gap-2 text-white cursor-pointer hover:bg-white/10 transition duration-200 ease-in-out'><TbArrowGuide className='text-xl' />
                                         Guide
                                     </button>
                                 </div>
@@ -52,48 +53,51 @@ const Main = () => {
                     </div>
                 </div>
                 <div className=' bg-[#1F1F1F] text-[#ce9600] rounded-xl mt-7 mb-5 py-8 px-10 border border-[#262626]'>
-                    <div className='flex items-center justify-between hover:bg-[#262626] cursor-pointer pr-1 pl-2 py-1 rounded-lg transition-colors duration-100'>
-                        <h6 className='text-white'>COIM Generation</h6>
-                        <div className=' bg-[#2c281d] rounded-2xl px-2 py-2  flex gap-2 items-center'>
-                            <div><FaArrowRight /></div>
-                            <span>Minnnig</span>
+                    <Link to="/token">
+                        <div className='flex items-center justify-between hover:bg-[#262626] cursor-pointer pr-1 pl-2 py-1 rounded-lg transition-colors duration-100'>
+                            <h6 className='text-white'>COIM Generation</h6>
+                            <div className=' bg-[#2c281d] rounded-2xl px-2 py-2  flex gap-2 items-center'>
+                                <div><FaArrowRight /></div>
+                                <span>Minnnig</span>
+                            </div>
                         </div>
-                    </div>
-                    <div className='flex items-center text-[#ce9600] justify-between mt-7  hover:bg-[#262626] pr-1 pl-2 py-1 cursor-pointer rounded-lg transition-colors duration-100'>
-                        <h6 className='text-white'>Wallet</h6>
-                        <div className=' bg-[#2c281d] rounded-2xl px-2 py-2  flex gap-2 items-center'>
-                            <div><FaArrowRight /></div>
-                            <span>Wallet</span>
+                    </Link>
+                    <Link to="/wallet">
+                        <div className='flex items-center text-[#ce9600] justify-between mt-7  hover:bg-[#262626] pr-1 pl-2 py-1 cursor-pointer rounded-lg transition-colors duration-100'>
+                            <h6 className='text-white'>Wallet</h6>
+                            <div className=' bg-[#2c281d] rounded-2xl px-2 py-2  flex gap-2 items-center'>
+                                <div><FaArrowRight /></div>
+                                <span>Wallet</span>
+                            </div>
                         </div>
-                    </div>
-                    <div className='flex items-center text-[#ce9600] justify-between mt-7  hover:bg-[#262626] pr-1 pl-2 py-1 cursor-pointer rounded-lg transition-colors duration-100'>
-                        <h6 className='text-white'>Refferals</h6>
-                        <div className=' bg-[#2c281d] rounded-2xl px-2 py-2  flex gap-2 items-center'>
-                            <div><FaArrowRight /></div>
-                            <span>Refferals</span>
+                    </Link>
+                    <Link to="/ref">
+                        <div className='flex items-center text-[#ce9600] justify-between mt-7  hover:bg-[#262626] pr-1 pl-2 py-1 cursor-pointer rounded-lg transition-colors duration-100'>
+                            <h6 className='text-white'>Refferals</h6>
+                            <div className=' bg-[#2c281d] rounded-2xl px-2 py-2  flex gap-2 items-center'>
+                                <div><FaArrowRight /></div>
+                                <span>Refferals</span>
+                            </div>
                         </div>
-                    </div>
-                    <div className='flex items-center text-[#ce9600] justify-between mt-7  hover:bg-[#262626] pr-1 pl-2 py-1 cursor-pointer rounded-lg transition-colors duration-100'>
-                        <h6 className='text-white'>News</h6>
-                        <div className=' bg-[#2c281d] rounded-2xl px-2 py-2  flex gap-2 items-center'>
-                            <div><FaArrowRight /></div>
-                            <span>News</span>
+                    </Link>
+                    <Link to="/news">
+                        <div className='flex items-center text-[#ce9600] justify-between mt-7  hover:bg-[#262626] pr-1 pl-2 py-1 cursor-pointer rounded-lg transition-colors duration-100'>
+                            <h6 className='text-white'>News</h6>
+                            <div className=' bg-[#2c281d] rounded-2xl px-2 py-2  flex gap-2 items-center'>
+                                <div><FaArrowRight /></div>
+                                <span>News</span>
+                            </div>
                         </div>
-                    </div>
-                    <div className='flex items-center text-[#ce9600] justify-between mt-7  hover:bg-[#262626] pr-1 pl-2 py-1 cursor-pointer rounded-lg transition-colors duration-100'>
-                        <h6 className='text-white'>My Profile</h6>
-                        <div className=' bg-[#2c281d] rounded-2xl px-2 py-2  flex gap-2 items-center'>
-                            <div><FaArrowRight /></div>
-                            <span>My Profile</span>
+                    </Link>
+                    <Link to="/profile">
+                        <div className='flex items-center text-[#ce9600] justify-between mt-7  hover:bg-[#262626] pr-1 pl-2 py-1 cursor-pointer rounded-lg transition-colors duration-100'>
+                            <h6 className='text-white'>My Profile</h6>
+                            <div className=' bg-[#2c281d] rounded-2xl px-2 py-2  flex gap-2 items-center'>
+                                <div><FaArrowRight /></div>
+                                <span>My Profile</span>
+                            </div>
                         </div>
-                    </div>
-                    <div className='flex items-center text-[#ce9600] justify-between mt-7  hover:bg-[#262626] pr-1 pl-2 py-1 cursor-pointer rounded-lg transition-colors duration-100'>
-                        <h6 className='text-white'>Wallet</h6>
-                        <div className=' bg-[#2c281d] rounded-2xl px-2 py-2  flex gap-2 items-center'>
-                            <div><FaArrowRight /></div>
-                            <span>Minnnig</span>
-                        </div>
-                    </div>
+                    </Link>
                 </div>
                 <div>
                     <div className='flex items-center justify-center gap-5 pb-20'>

@@ -21,6 +21,8 @@ const AllReferrals = () => {
                 }
             } catch (error) {
                 console.error('Error fetching profile data:', error);
+            } finally {
+                setLoading(false);
             }
         };
 
@@ -30,18 +32,19 @@ const AllReferrals = () => {
                 const q = query(collection(db, 'profiles'), where('referrerID', '==', userId));
                 const querySnapshot = await getDocs(q);
                 const referralsList = querySnapshot.docs.map(doc => doc.data());
-                console.log(referralsList);
                 setReferrals(referralsList);
             } catch (error) {
                 console.error('Error fetching referrals:', error);
             }
         };
 
-
-
         fetchUserProfile();
         fetchReferrals();
     }, []);
+
+    if (loading) {
+        return <div>Loading...</div>;
+    }
 
     return (
         <div className='px-3 lg:px-20 mt-5'>
@@ -63,27 +66,33 @@ const AllReferrals = () => {
                             </div>
                         </div>
                     </div>
-                    <div className='bg-[#1F1F1F] rounded-xl mt-8 pb-4 px-10 border border-[#262626]'>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 pt-4">
-                            {referrals.map((referral, index) => (
-                                <div key={index} className='bg-[#363636] rounded-xl p-2'>
-                                    <div className='flex flex-col gap-4 md:flex md:flex-row lg:items-center'>
-                                        <div className=''>
-                                            {referral.imageUrl ? (
-                                                <img src={referral.imageUrl} className='w-10 h-10 rounded-full' alt="referral" />
-                                            ) : (
-                                                <FaRegUserCircle className='text-white w-10 h-10' />
-                                            )}
-                                        </div>
-                                        <div className='text-white flex flex-col gap-1'>
-                                            <p>{referral.firstName}</p>
-                                            <p className='text-sm'>{referral.surname}</p>
+                    {referrals.length === 0 ? (
+                            <h4 className="mb-6 mt-10 text-md font-semibold text-center text-white">
+                                No Referrals Available
+                            </h4>
+                    ) : (
+                        <div className='bg-[#1F1F1F] rounded-xl mt-8 pb-4 px-10 border border-[#262626]'>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 pt-4">
+                                {referrals.map((referral, index) => (
+                                    <div key={index} className='bg-[#363636] rounded-xl p-2'>
+                                        <div className='flex flex-col gap-4 md:flex md:flex-row lg:items-center'>
+                                            <div className=''>
+                                                {referral.imageUrl ? (
+                                                    <img src={referral.imageUrl} className='w-10 h-10 rounded-full' alt="referral" />
+                                                ) : (
+                                                    <FaRegUserCircle className='text-white w-10 h-10' />
+                                                )}
+                                            </div>
+                                            <div className='text-white flex flex-col gap-1'>
+                                                <p>{referral.firstName}</p>
+                                                <p className='text-sm'>{referral.surname}</p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            ))}
+                                ))}
+                            </div>
                         </div>
-                    </div>
+                    )}
                 </>
             )}
         </div>

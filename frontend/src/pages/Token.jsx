@@ -16,8 +16,8 @@ const Token = () => {
       const interval = setInterval(() => {
         const now = new Date();
         const elapsed = now - startTime;
-        const percentage = (elapsed / (24 * 60 * 60 * 1000)) * 100;
-        // const percentage = (elapsed / (60 * 1000)) * 100; 
+        // const percentage = (elapsed / (24 * 60 * 60 * 1000)) * 100;
+        const percentage = (elapsed / (60 * 1000)) * 100; 
         setProgress(percentage);
 
         if (percentage >= 100) {
@@ -34,8 +34,8 @@ const Token = () => {
 
   const startMining = () => {
     const now = new Date();
-    const end = new Date(now.getTime() + 24 * 60 * 60 * 1000);
-    // const end = new Date(now.getTime() + 60 * 1000);
+    // const end = new Date(now.getTime() + 24 * 60 * 60 * 1000);
+    const end = new Date(now.getTime() + 60 * 1000);
     setStartTime(now);
     setEndTime(end);
     setIsMining(true);
