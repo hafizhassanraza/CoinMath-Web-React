@@ -117,7 +117,7 @@ const ProfileDetail = () => {
     };
 
     return (
-        <div className='px-56'>
+        <div className=' lg:px-[100px]'>
             <div className='rounded-b-xl overflow-hidden border border-[#262626]'>
                 <div className=''>
                     <img src={banner} className='w-full md:h-56' alt="banner" />
@@ -136,9 +136,8 @@ const ProfileDetail = () => {
                     </div>
                 </div>
             </div>
-            <div className='flex justify-center items-center gap-6 bg-[#1F1F1F] rounded-xl my-7   border border-[#262626]'>
-                <form onSubmit={handleProfileDetails} className='  bg-[#1F1F1F]'>
-                    <div className=''>
+            <div className='  md:w-full gap-6 bg-[#1F1F1F] rounded-xl my-7 md:px-10  border border-[#262626]'>
+                <form onSubmit={handleProfileDetails}>
                         <div className=''>
                             <div className="relative px-6 pt-6 mb-3 flex text-white">
                                 <h6 className="font-bold text-[16px]">First Name</h6>
@@ -149,6 +148,7 @@ const ProfileDetail = () => {
                                     onChange={(e) => setFname(e.target.value)}
                                     value={Fname}
                                     required
+                                    placeholder='Enter Your First Name'
                                     className="w-full px-3 rounded-lg py-2 text-white bg-[#363636] focus:outline-none focus:ring-2 focus:ring-[#CE9600] hover:ring-2 hover:ring-[#363636]/30 ease-in-out transition-all"
                                 />
                             </div>
@@ -163,6 +163,7 @@ const ProfileDetail = () => {
                                     onChange={(e) => setSurname(e.target.value)}
                                     value={surName}
                                     required
+                                    placeholder='Enter Your Surname'
                                     className="w-full px-3 rounded-lg py-2 text-white bg-[#363636] focus:outline-none focus:ring-2 focus:ring-[#CE9600] hover:ring-2 hover:ring-[#363636]/30 ease-in-out transition-all"
                                 />
                             </div>
@@ -198,6 +199,7 @@ const ProfileDetail = () => {
                                     onChange={(e) => setEmail(e.target.value)}
                                     value={email}
                                     required
+                                     placeholder='Enter Your Email'
                                     className="w-full px-3 rounded-lg py-2 text-white bg-[#363636] focus:outline-none focus:ring-2 focus:ring-[#CE9600] hover:ring-2 hover:ring-[#363636]/30 ease-in-out transition-all"
                                 />
                             </div>
@@ -212,6 +214,7 @@ const ProfileDetail = () => {
                                     onChange={(e) => setPin(e.target.value)}
                                     value={pin}
                                     required
+                                     placeholder='Enter Your Pin'
                                     className="w-full px-3 rounded-lg py-2 text-white bg-[#363636] focus:outline-none focus:ring-2 focus:ring-[#CE9600] hover:ring-2 hover:ring-[#363636]/30 ease-in-out transition-all"
                                 />
                             </div>
@@ -229,6 +232,7 @@ const ProfileDetail = () => {
                                     }}
                                     value={phone}
                                     required
+                                     placeholder='Enter Your Phone No.'
                                     className="w-full px-3 rounded-lg py-2 text-white bg-[#363636] focus:outline-none focus:ring-2 focus:ring-[#CE9600] hover:ring-2 hover:ring-[#363636]/30 ease-in-out transition-all"
                                     pattern="[0-9]*"
                                 />
@@ -244,7 +248,7 @@ const ProfileDetail = () => {
                                     type="text"
                                     onChange={(e) => setRefBy(e.target.value)}
                                     value={refBy}
-                                    placeholder='Enter your referral code here...'
+                                    placeholder='Enter your referral code here'
                                     onBlur={checkReferralCode}
                                     className="w-full px-3 rounded-lg py-2 text-white bg-[#363636] focus:outline-none focus:ring-2 focus:ring-[#CE9600] hover:ring-2 hover:ring-[#363636]/30 ease-in-out transition-all"
                                 />
@@ -265,7 +269,7 @@ const ProfileDetail = () => {
                                     onChange={(e) => setRefCode(e.target.value)}
                                     value={refCode}
                                     required
-                                    placeholder='Enter your custom referral code here...'
+                                    placeholder='Enter your custom referral code here'
                                     className="w-full px-3 rounded-lg py-2 text-white bg-[#363636] focus:outline-none focus:ring-2 focus:ring-[#CE9600] hover:ring-2 hover:ring-[#363636]/30 ease-in-out transition-all"
                                 />
                             </div>
@@ -273,7 +277,7 @@ const ProfileDetail = () => {
                         <div className="mb-10 mt-4">
                             <div className="flex items-center justify-center ">
                                 <button
-                                    className="text-white px-48 bg-[#CE9600] hover:bg-[#CE9600]/90 justify-center mx-5 md:mx-0  my-3 lg:mx-80 rounded-lg cursor-pointer border-solid border-blueGray-200 flex items-center gap-2 background-transparent font-bold  py-2.5 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                                    className="text-white px-20 md:px-48  bg-[#CE9600] hover:bg-[#CE9600]/90 justify-center mx-5 md:mx-0  my-3 lg:mx-80 rounded-lg cursor-pointer border-solid border-blueGray-200 flex items-center gap-2 background-transparent font-bold  py-2.5 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                                     type="submit"
                                     disabled={refBy && !referralCodeExists}
                                     style={{ cursor: refBy && !referralCodeExists ? 'not-allowed' : 'pointer' }}
@@ -283,7 +287,6 @@ const ProfileDetail = () => {
                             </div>
                         </div>
                         <p className='text-[11px] md:text-[13px] text-center mt-2 text-white mb-6'>Already have an account? <Link to="/signin"><span className='text-gray-700 hover:underline cursor-pointer font-bold'>Sign In</span></Link></p>
-                    </div>
                 </form>
             </div>
         </div>
