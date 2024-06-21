@@ -17,11 +17,12 @@ import EmailChecker from './pages/EmailChecker';
 import ProfileDetail from './pages/ProfileDetail';
 import AllReferrals from './components/AllReferrals';
 import UpdateProfile from './components/UpdateProfile';
+import Navbar from './components/Navbar';
 
 function NavbarControl() {
     const location = useLocation();
     const isProtectedRoute = !['/signin', '/signup', '/login', '/check', '/details'].includes(location.pathname);
-    return isProtectedRoute && <ComplexNavbar />;
+    return isProtectedRoute && <Navbar />;
 }
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
                 <NavbarControl />
                 <Routes>
                     <Route path="/" element={<ProtectedRoute><Main /></ProtectedRoute>} />
+                    {/* <Route path="/nav" element={<ProtectedRoute><Navbar /></ProtectedRoute>} /> */}
                     <Route path="/wallet" element={<ProtectedRoute><Wallet /></ProtectedRoute>} />
                     <Route path="/ref" element={<ProtectedRoute><Referrals /></ProtectedRoute>} />
                     <Route path="/news" element={<ProtectedRoute><News /></ProtectedRoute>} />
