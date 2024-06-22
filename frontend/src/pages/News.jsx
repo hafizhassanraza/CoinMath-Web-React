@@ -1,11 +1,30 @@
-import React from 'react'
-import banner from '../assets/images/banner.webp'
-import news1 from '../assets/images/news1.jpeg'
-import news2 from '../assets/images/news2.png'
-import news3 from '../assets/images/news3.jpg'
-import news4 from '../assets/images/new4.jpg'
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { collection, getDocs } from 'firebase/firestore';
+import { db } from '../components/firebase';
+import banner from '../assets/images/banner.webp';
+import { FaImage } from 'react-icons/fa';
 
 const News = () => {
+    const [blogs, setBlogs] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchBlogs = async () => {
+            try {
+                const querySnapshot = await getDocs(collection(db, 'blogs'));
+                const blogsList = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                setBlogs(blogsList);
+                setLoading(false);
+            } catch (error) {
+                console.error('Error fetching blogs: ', error);
+                setLoading(false);
+            }
+        };
+
+        fetchBlogs();
+    }, []);
+
     return (
         <>
             <div className='px-3 lg:px-20 mt-5'>
@@ -28,35 +47,22 @@ const News = () => {
                     </div>
                 </div>
                 <div className=' bg-[rgba(255, 255, 255, 0.07)] rounded-2xl mt-8 mb-16 py-4 px-10 border border-[#262626]'>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                        <div className='bg-[#363636] rounded-xl p-2 cursor-pointer'>
-                            <div><img src={news1} alt="news" className='rounded-lg  mb-4' /></div>
-                            <div className='px-2 mb-6'>
-                                <p className='text-white font-bold text-[16px]'>CoinMath: Roadmap</p>
-                                <p className='text-sm text-white'>May 24, 2024</p>
-                            </div>
-                        </div>
-                        <div className='bg-[#363636] rounded-xl p-2 cursor-pointer'>
-                            <div><img src={news2} alt="news" className='rounded-lg  mb-4' /></div>
-                            <div className='px-2 mb-6'>
-                                <p className='text-white font-bold text-[16px]'>CoinMath: Roadmap</p>
-                                <p className='text-sm text-white'>May 24, 2024</p>
-                            </div>
-                        </div>
-                        <div className='bg-[#363636] rounded-xl p-2 cursor-pointer'>
-                            <div><img src={news3} alt="news" className='rounded-lg  mb-4' /></div>
-                            <div className='px-2 mb-6'>
-                                <p className='text-white font-bold text-[16px]'>CoinMath: Roadmap</p>
-                                <p className='text-sm text-white'>May 24, 2024</p>
-                            </div>
-                        </div>
-                        <div className='bg-[#363636] rounded-xl p-2 cursor-pointer'>
-                            <div><img src={news4} alt="news" className='rounded-lg  mb-4' /></div>
-                            <div className='px-2 mb-6'>
-                                <p className='text-white font-bold text-[16px]'>CoinMath: Roadmap</p>
-                                <p className='text-sm text-white'>May 24, 2024</p>
-                            </div>
-                        </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                        {loading ? (
+                            <p>Loading...</p>
+                        ) : (
+                            blogs.map(blog => (
+                                <div key={blog.id} className='bg-[#363636] rounded-xl p-2 cursor-pointer'>
+                                    <Link to={`${blog.link}`}>
+                                        <div><img src={blog.blogImage} alt="news" className='rounded-lg mb-4' /></div>
+                                        <div className='px-2 mb-6'>
+                                            <p className='text-white font-bold text-[16px]'>{blog.title}</p>
+                                            <p className='text-sm text-white'>{blog.date}</p>
+                                        </div>
+                                    </Link>
+                                </div>
+                            ))
+                        )}
                     </div>
                 </div>
             </div>
@@ -64,4 +70,4 @@ const News = () => {
     )
 }
 
-export default News
+export default News;
