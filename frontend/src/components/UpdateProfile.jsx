@@ -31,7 +31,7 @@ const UpdateProfile = () => {
         try {
             const docRef = doc(db, 'profiles', userId);
             const docSnap = await getDoc(docRef);
-           
+
             if (docSnap.exists()) {
                 const userProfile = docSnap.data();
                 setFname(userProfile.firstName || '');
@@ -39,7 +39,7 @@ const UpdateProfile = () => {
                 setEmail(userProfile.email || '');
                 setPin(userProfile.pin || '');
                 setPhone(userProfile.phone || '');
-                setChosenImage(userProfile.profileImageFileName || '');
+                setChosenImage(userProfile.profileImage || '');
             } else {
                 console.log('No such document!');
             }
@@ -67,18 +67,19 @@ const UpdateProfile = () => {
         e.preventDefault();
         try {
             const { downloadUrl, fileName } = await uploadImage();
-            const userProfile = {
-                firstName: Fname,
-                surname: surName,
-                email,
-                pin,
-                phone,
-                profileImage: downloadUrl,
-                profileImageFileName: fileName,
-            };
+
+            const userProfileUpdates = {};
+            if (Fname !== '') userProfileUpdates.firstName = Fname;
+            if (surName !== '') userProfileUpdates.surname = surName;
+            if (email !== '') userProfileUpdates.email = email;
+            if (pin !== '') userProfileUpdates.pin = pin;
+            if (phone !== '') userProfileUpdates.phone = phone;
+            if (downloadUrl) {
+                userProfileUpdates.profileImage = downloadUrl;
+            }
 
             const docRef = doc(db, 'profiles', userId);
-            await setDoc(docRef, userProfile);
+            await setDoc(docRef, userProfileUpdates, { merge: true });
             navigate('/profile');
         } catch (error) {
             console.error('Error updating profile:', error);
@@ -190,32 +191,26 @@ const UpdateProfile = () => {
                     </div>
                     <div className=''>
                         <div className="relative px-6 pt-2 mb-3 flex text-white">
-                            <h6 className="font-bold text-[16px]">Phone Number</h6>
+                            <h6 className="font-bold text-[16px]">Phone</h6>
                         </div>
                         <div className="pb-5 px-6">
                             <input
                                 type="text"
-                                onChange={(e) => {
-                                    const enteredValue = e.target.value.replace(/\D/g, '');
-                                    setPhone(enteredValue);
-                                }}
+                                onChange={(e) => setPhone(e.target.value)}
                                 value={phone}
                                 required
-                                placeholder='Enter Your Phone No.'
+                                placeholder='Enter Your Phone Number'
                                 className="w-full px-3 rounded-lg py-2 text-white bg-[#363636] focus:outline-none focus:ring-2 focus:ring-[#CE9600] hover:ring-2 hover:ring-[#363636]/30 ease-in-out transition-all"
-                                pattern="[0-9]*"
                             />
                         </div>
                     </div>
-                    <div className="mb-10 mt-4">
-                        <div className="flex items-center justify-center ">
-                            <button
-                                className="text-white px-20 md:px-48  bg-[#CE9600] hover:bg-[#CE9600]/90 justify-center mx-5 md:mx-0  my-3 lg:mx-80 rounded-lg cursor-pointer border-solid border-blueGray-200 flex items-center gap-2 background-transparent font-bold  py-2.5 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                                type="submit"
-                            >
-                                <SiTicktick />  Onboard me!
-                            </button>
-                        </div>
+                    <div className="flex justify-center">
+                        <button
+                            type="submit"
+                            className="bg-[#CE9600] text-white font-bold rounded-full py-2 px-8 hover:bg-[#C67800] transition ease-in-out"
+                        >
+                            Update Profile
+                        </button>
                     </div>
                 </form>
             </div>

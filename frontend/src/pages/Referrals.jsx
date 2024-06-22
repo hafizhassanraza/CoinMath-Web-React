@@ -5,27 +5,56 @@ import { IoShareSocialOutline } from "react-icons/io5";
 import { Link } from 'react-router-dom';
 import { collection, doc, getDoc, getDocs, query, where, writeBatch, deleteDoc } from 'firebase/firestore';
 import { db } from '../components/firebase';
+import { IoCheckmarkCircleOutline,IoCopyOutline  } from "react-icons/io5";
 
 
 
 const Referrals = () => {
     const [totalReferrals, setTotalReferrals] = useState(0);
-
-    const fetchTotalReferrals = async () => {
-        try {
-            const userId = localStorage.getItem('userId');
-            const q = query(collection(db, 'profiles'), where('referrerID', '==', userId));
-            const querySnapshot = await getDocs(q);
-            setTotalReferrals(querySnapshot.size);
-        } catch (error) {
-            console.error('Error fetching total referrals:', error);
-        }
-    };
+    const [profileData, setProfileData] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [copied, setCopied] = useState(false);
 
     useEffect(() => {
+        const fetchTotalReferrals = async () => {
+            try {
+                const userId = localStorage.getItem('userId');
+                const q = query(collection(db, 'profiles'), where('referrerID', '==', userId));
+                const querySnapshot = await getDocs(q);
+                setTotalReferrals(querySnapshot.size);
+            } catch (error) {
+                console.error('Error fetching total referrals:', error);
+            }
+        };
+
+        const fetchUserProfile = async () => {
+            try {
+                const userId = localStorage.getItem('userId');
+                const docRef = doc(db, 'profiles', userId);
+                const docSnap = await getDoc(docRef);
+                if (docSnap.exists()) {
+                    setProfileData(docSnap.data());
+                } else {
+                    console.log('No such document!');
+                }
+            } catch (error) {
+                console.error('Error fetching profile data:', error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
         fetchTotalReferrals();
+        fetchUserProfile();
     }, []);
 
+    const copyToClipboard = () => {
+        navigator.clipboard.writeText(profileData.referralCode);
+        setCopied(true);
+        setTimeout(() => {
+            setCopied(false);
+        }, 3000);
+    };
 
     return (
         <>
@@ -51,9 +80,21 @@ const Referrals = () => {
                 <div className=' bg-[#1F1F1F] text-[#ce9600] rounded-xl mt-7 p-3 px-3 md:px-10 border border-[#262626]'>
                     <div className='flex items-center text-[#ce9600] justify-between   hover:bg-[#262626] pr-1 pl-2 py-1 cursor-pointer rounded-lg transition-colors duration-100'>
                         <h6 className='text-white text-[14px]'>Copy Referral Code</h6>
-                        <div className=' bg-[#2c281d] rounded-2xl px-3 py-1.5  flex gap-2 items-center'>
-                            <div><LuCopy /></div>
-                            <span className='text-[12px]'>Copy</span>
+                        <div
+                            className=' bg-[#2c281d] rounded-2xl px-3 py-1.5  flex gap-2 items-center'
+                            onClick={copyToClipboard}
+                        >
+                            {copied ? (
+                                <>
+                                    <IoCheckmarkCircleOutline className='text-green-500' />
+                                    <span className='text-[12px] text-green-500'>Copied</span>
+                                </>
+                            ) : (
+                                <>
+                                    <IoCopyOutline />
+                                    <span className='text-[12px]'>Copy</span>
+                                </>
+                            )}
                         </div>
                     </div>
                 </div>
