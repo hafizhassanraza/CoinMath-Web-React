@@ -22,6 +22,7 @@ const Profile = () => {
     const openSideModal = () => setShowSideModal(true);
     const closeSideModal = () => setShowSideModal(false);
 
+
     const fetchUserProfile = async () => {
         try {
             const userId = localStorage.getItem('userId');
@@ -88,7 +89,6 @@ const Profile = () => {
             console.error('Error deleting user or updating referrals:', error);
         }
     };
-
     useEffect(() => {
         fetchUserProfile();
         fetchTotalReferrals();
@@ -105,8 +105,8 @@ const Profile = () => {
                     <div className='rounded-xl border border-[#262626] bg-[#1F1F1F]'>
                         <div className='text-[130px] flex justify-center items-center mt-14 mb-3'>
                             <div>
-                                {profileData.imageUrl ? (
-                                    <img src={profileData.imageUrl} className='rounded-full w-32 h-32' alt='user' />
+                                {profileData.profileImage ? (
+                                    <img src={profileData.profileImage} className='rounded-full w-32 h-32' alt='user' />
                                 ) : (
                                     <FaRegUserCircle className='text-white' />
                                 )}
