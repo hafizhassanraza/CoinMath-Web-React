@@ -57,7 +57,7 @@ const News = () => {
                                         <div><img src={blog.blogImage} alt="news" className='rounded-lg mb-4' /></div>
                                         <div className='px-2 mb-6'>
                                             <p className='text-white font-bold text-[16px]'>{blog.title}</p>
-                                            <p className='text-sm text-white'>{blog.date}</p>
+                                            <p className='text-sm text-[#a4a4a4]'>{blog.date}</p>
                                         </div>
                                     </Link>
                                 </div>
